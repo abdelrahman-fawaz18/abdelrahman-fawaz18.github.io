@@ -1,0 +1,36 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ImageViewer from '../components/ImageViewer.astro';
+import { local } from '../lib/urls';
+import '../styles/global.css';
+interface Props { title?: string; description?: string; active?: string; home?: boolean; }
+const { title = 'Abdelrahman Elsayed — Electronics & communications', description = 'Electronics, embedded sensing, communication networks, and system validation. Selected projects and interests of Abdelrahman Elsayed in Montreal.', active = '', home = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const indexable = import.meta.env.PUBLIC_SITE_LIVE === 'true';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#121212" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={local('favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(local('social-preview.png'), Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-shell"><Header active={active} home={home} /><main id="main" tabindex="-1"><slot /></main><Footer /></div>
+    <ImageViewer />
+  </body>
+</html>

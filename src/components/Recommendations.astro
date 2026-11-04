@@ -1,0 +1,8 @@
+---
+import Arrow from './Arrow.astro';
+import { local } from '../lib/urls';
+const { items, type } = Astro.props;
+---
+<ol class="recommendation-list">
+  {items.map((item: any, index: number) => <li class:list={{ 'with-artwork': Boolean(item.artwork) }}><span class="recommendation-number">0{index + 1}</span>{item.artwork && <img class:list={['recommendation-art', { 'film-poster': type === 'film' }]} src={local(item.artwork)} alt={item.artworkAlt || ''} width={item.artworkWidth || 160} height={item.artworkHeight || (type === 'film' ? 240 : 160)} loading="lazy" decoding="async" />}<div><h3>{item.url ? <a href={item.url}>{item.title}<Arrow diagonal /></a> : item.title}</h3><p>{item.creator}</p>{item.note && <p class="recommendation-note">{item.note}</p>}</div></li>)}
+</ol>

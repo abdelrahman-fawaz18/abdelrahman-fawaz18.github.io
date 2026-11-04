@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc" data-design-system="systems-lab-v1" data-layout="figure">
+  <title id="title">Three-cell heterogeneous-QoS simulation scenario</title>
+  <desc id="desc">A seeded UMa topology with three gNodeBs, eight broadband UEs, four low-latency UEs, reuse-one interference, and a controlled scheduler comparison.</desc>
+  <metadata>3 gNodeBs · 12 UEs · Broadband UE x 8 · Low-latency UE x 4 · 3.5 GHz · 100 MHz · 5 ms deadline · compatibility color #f4f6f8</metadata>
+
+  <rect width="1600" height="850" fill="#f7f8fa"/>
+  <rect width="1600" height="11" fill="#0b1b2b"/>
+  <rect y="11" width="1600" height="4" fill="#2457d6"/>
+
+  <text x="68" y="70" fill="#2457d6" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" letter-spacing="2.3">FLAGSHIP SCENARIO</text>
+  <text x="68" y="126" fill="#0b1b2b" font-family="Arial Narrow,Segoe UI,Arial,sans-serif" font-size="46" font-weight="700">Three-cell downlink under heterogeneous QoS</text>
+  <text x="68" y="166" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="20">Seeded UMa geometry · shared spectrum · scheduler-controlled service</text>
+  <line x1="68" y1="194" x2="1532" y2="194" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <g id="topology" data-region="60 214 1050 570">
+    <text x="72" y="238" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" letter-spacing="1.3">SERVING CELLS AND UE CLASSES</text>
+
+    <g transform="translate(72 130) scale(.86)">
+    <polygon points="242,545 337,381 527,381 622,545 527,709 337,709" fill="#2457d6" fill-opacity=".045" stroke="#2457d6" stroke-opacity=".48" stroke-width="2.5"/>
+    <polygon points="625,545 720,381 910,381 1005,545 910,709 720,709" fill="#16865b" fill-opacity=".045" stroke="#16865b" stroke-opacity=".48" stroke-width="2.5"/>
+    <polygon points="433,316 528,152 718,152 813,316 718,480 528,480" fill="#64748b" fill-opacity=".035" stroke="#64748b" stroke-opacity=".42" stroke-width="2.5"/>
+
+    <g stroke="#2457d6" stroke-opacity=".32" stroke-width="2">
+      <line x1="432" y1="545" x2="286" y2="515"/><line x1="432" y1="545" x2="351" y2="661"/><line x1="432" y1="545" x2="566" y2="606"/>
+    </g>
+    <g stroke="#16865b" stroke-opacity=".32" stroke-width="2">
+      <line x1="815" y1="545" x2="700" y2="661"/><line x1="815" y1="545" x2="947" y2="599"/><line x1="815" y1="545" x2="932" y2="463"/>
+    </g>
+    <g stroke="#64748b" stroke-opacity=".28" stroke-width="2">
+      <line x1="623" y1="316" x2="527" y2="224"/><line x1="623" y1="316" x2="730" y2="224"/>
+    </g>
+    <g stroke="#d98b00" stroke-opacity=".38" stroke-width="2" stroke-dasharray="5 6">
+      <line x1="432" y1="545" x2="330" y2="559"/><line x1="815" y1="545" x2="750" y2="616"/>
+      <line x1="623" y1="316" x2="535" y2="331"/><line x1="623" y1="316" x2="710" y2="331"/>
+    </g>
+
+    <path d="M432 545L815 545L623 316Z" fill="none" stroke="#bb4051" stroke-width="2.5" stroke-dasharray="9 9" opacity=".7"/>
+    <rect x="533" y="424" width="180" height="58" fill="#f7f8fa"/>
+    <text x="623" y="448" text-anchor="middle" fill="#bb4051" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="600" letter-spacing=".8">REUSE-1</text>
+    <text x="623" y="473" text-anchor="middle" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="16">inter-cell interference</text>
+
+    <g transform="translate(432 545)">
+      <circle r="34" fill="#f7f8fa" stroke="#2457d6" stroke-width="3.5"/>
+      <path d="M0 -19L-13 18M0 -19L13 18M-8 -1H8M-11 10H11" fill="none" stroke="#2457d6" stroke-width="3"/>
+      <text x="0" y="58" text-anchor="middle" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="600">gNB A</text>
+    </g>
+    <g transform="translate(815 545)">
+      <circle r="34" fill="#f7f8fa" stroke="#16865b" stroke-width="3.5"/>
+      <path d="M0 -19L-13 18M0 -19L13 18M-8 -1H8M-11 10H11" fill="none" stroke="#16865b" stroke-width="3"/>
+      <text x="0" y="58" text-anchor="middle" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="600">gNB B</text>
+    </g>
+    <g transform="translate(623 316)">
+      <circle r="34" fill="#f7f8fa" stroke="#0b1b2b" stroke-width="3.5"/>
+      <path d="M0 -19L-13 18M0 -19L13 18M-8 -1H8M-11 10H11" fill="none" stroke="#0b1b2b" stroke-width="3"/>
+      <text x="0" y="58" text-anchor="middle" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="18" font-weight="600">gNB C</text>
+    </g>
+
+    <g fill="#2457d6" stroke="#ffffff" stroke-width="2">
+      <circle cx="286" cy="515" r="17"/><circle cx="351" cy="661" r="17"/><circle cx="566" cy="606" r="17"/>
+      <circle cx="700" cy="661" r="17"/><circle cx="947" cy="599" r="17"/><circle cx="932" cy="463" r="17"/>
+      <circle cx="527" cy="224" r="17"/><circle cx="730" cy="224" r="17"/>
+    </g>
+    <g fill="#d98b00" stroke="#ffffff" stroke-width="2">
+      <path d="M330 539L350 559L330 579L310 559Z"/><path d="M750 596L770 616L750 636L730 616Z"/>
+      <path d="M535 311L555 331L535 351L515 331Z"/><path d="M710 311L730 331L710 351L690 331Z"/>
+    </g>
+    </g>
+
+    <line x1="72" y1="754" x2="1070" y2="754" stroke="#cbd5e1" stroke-width="1.5"/>
+    <circle cx="91" cy="784" r="9" fill="#2457d6"/>
+    <text x="111" y="790" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="16">Broadband UE</text>
+    <path d="M286 775L295 784L286 793L277 784Z" fill="#d98b00"/>
+    <text x="307" y="790" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="16">Low-latency UE</text>
+    <line x1="501" y1="784" x2="538" y2="784" stroke="#bb4051" stroke-width="2.5" stroke-dasharray="7 6"/>
+    <text x="553" y="790" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="16">Shared-spectrum interference</text>
+  </g>
+
+  <line x1="1140" y1="228" x2="1140" y2="799" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <g id="scenario-notes" data-region="1180 220 350 580">
+    <text x="1190" y="245" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" letter-spacing="1.4">TRAFFIC CLASSES</text>
+    <circle cx="1204" cy="289" r="10" fill="#2457d6"/>
+    <text x="1232" y="287" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="600">Broadband</text>
+    <text x="1232" y="312" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="16">8 UEs · load-driving traffic</text>
+
+    <path d="M1204 350L1215 361L1204 372L1193 361Z" fill="#d98b00"/>
+    <text x="1232" y="360" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="600">Low latency</text>
+    <text x="1232" y="385" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="16">4 UEs · 5 ms deadline</text>
+
+    <line x1="1190" y1="432" x2="1518" y2="432" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="1190" y="473" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" letter-spacing="1.4">SCHEDULER UNDER TEST</text>
+    <text x="1190" y="515" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="18">Round Robin</text>
+    <text x="1190" y="549" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="18">Max-C/I</text>
+    <text x="1190" y="583" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="18">Proportional Fair</text>
+
+    <line x1="1190" y1="626" x2="1518" y2="626" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="1190" y="668" fill="#2457d6" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" letter-spacing="1.4">CONTROLLED COMPARISON</text>
+    <text x="1190" y="709" fill="#0b1b2b" font-family="Segoe UI,Arial,sans-serif" font-size="21" font-weight="600">Same realization.</text>
+    <text x="1190" y="741" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="16">UE positions, packet arrivals and</text>
+    <text x="1190" y="766" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="16">channel state stay fixed; only the</text>
+    <text x="1190" y="791" fill="#56687b" font-family="Segoe UI,Arial,sans-serif" font-size="16">scheduler changes.</text>
+  </g>
+</svg>

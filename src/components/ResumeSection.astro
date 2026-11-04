@@ -1,0 +1,7 @@
+---
+const { id, title, number, tone = 'neutral' } = Astro.props;
+---
+<section id={id} class:list={['cv-section', `cv-tone-${tone}`]} aria-labelledby={`${id}-heading`}>
+  <header class="cv-section-heading"><span class="cv-section-number" aria-hidden="true">{number}</span><h2 id={`${id}-heading`}>{title}</h2></header>
+  <div class="cv-section-body"><slot /></div>
+</section>

@@ -1,0 +1,15 @@
+---
+import Arrow from './Arrow.astro';
+import SocialLinks from './SocialLinks.astro';
+import { local, email } from '../lib/urls';
+---
+<footer class="site-footer" id="contact">
+  <div class="footer-main">
+    <div><p class="eyebrow">Get in touch</p><h2>Let’s connect.</h2><p>Have a project in mind, or want to compare notes?</p></div>
+    <a class="contact-link" href={`mailto:${email}`}>Send me an email <Arrow /></a>
+  </div>
+  <div class="footer-bottom">
+    <p>Abdelrahman Elsayed <span>· Montreal, Canada</span></p>
+    <div class="footer-links"><SocialLinks /><a class="footer-resume" href={local('resume/')}>Resume <Arrow /></a></div>
+  </div>
+</footer>

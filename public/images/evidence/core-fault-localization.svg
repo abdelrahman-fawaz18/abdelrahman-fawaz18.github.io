@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 650" role="img" aria-labelledby="title desc">
+  <title id="title">Dependency-ordered fault localization</title>
+  <desc id="desc">Five faults mapped to their first failed boundary from NG Setup through the N6 return path.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#dce2e8" stroke-width="1"/></pattern>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#64748b"/></marker>
+  </defs>
+  <rect width="1600" height="650" fill="#f4f6f8"/>
+  <rect width="1600" height="650" fill="url(#grid)"/>
+  <rect x="48" y="42" width="1504" height="566" rx="6" fill="#ffffff" stroke="#c4cdd7"/>
+  <text x="88" y="92" fill="#0b1b2b" font-family="Arial Narrow, Arial, Segoe UI, sans-serif" font-size="28" font-weight="700">Fault localization by preserved dependency</text>
+  <text x="88" y="122" fill="#5f6f80" font-family="Arial, Segoe UI, sans-serif" font-size="16">Each experiment changes one contract, records the first failed boundary, then proves recovery.</text>
+
+  <g font-family="Arial Narrow, Arial, Segoe UI, sans-serif">
+    <g transform="translate(86 183)">
+      <rect width="208" height="90" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+      <text x="104" y="37" text-anchor="middle" fill="#0b1b2b" font-size="18" font-weight="700">SCTP</text>
+      <text x="104" y="64" text-anchor="middle" fill="#5f6f80" font-size="14">N2 transport</text>
+    </g>
+    <line x1="294" y1="228" x2="330" y2="228" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(338 183)">
+      <rect width="208" height="90" rx="4" fill="#eaf0ff" stroke="#2457d6" stroke-width="2"/>
+      <text x="104" y="37" text-anchor="middle" fill="#0b1b2b" font-size="18" font-weight="700">NG Setup</text>
+      <text x="104" y="64" text-anchor="middle" fill="#5f6f80" font-size="14">PLMN + served TAI</text>
+    </g>
+    <line x1="546" y1="228" x2="582" y2="228" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(590 183)">
+      <rect width="208" height="90" rx="4" fill="#eaf0ff" stroke="#2457d6" stroke-width="2"/>
+      <text x="104" y="37" text-anchor="middle" fill="#0b1b2b" font-size="18" font-weight="700">5G-AKA</text>
+      <text x="104" y="64" text-anchor="middle" fill="#5f6f80" font-size="14">AUTN validation</text>
+    </g>
+    <line x1="798" y1="228" x2="834" y2="228" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(842 183)">
+      <rect width="208" height="90" rx="4" fill="#eaf0ff" stroke="#2457d6" stroke-width="2"/>
+      <text x="104" y="37" text-anchor="middle" fill="#0b1b2b" font-size="18" font-weight="700">Registration</text>
+      <text x="104" y="64" text-anchor="middle" fill="#5f6f80" font-size="14">NAS security + mobility</text>
+    </g>
+    <line x1="1050" y1="228" x2="1086" y2="228" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(1094 183)">
+      <rect width="208" height="90" rx="4" fill="#e8f5ef" stroke="#16865b" stroke-width="2"/>
+      <text x="104" y="37" text-anchor="middle" fill="#0b1b2b" font-size="18" font-weight="700">PDU session</text>
+      <text x="104" y="64" text-anchor="middle" fill="#5f6f80" font-size="14">DNN + PFCP + N3</text>
+    </g>
+    <line x1="1302" y1="228" x2="1338" y2="228" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+    <g transform="translate(1346 183)">
+      <rect width="166" height="90" rx="4" fill="#e8f5ef" stroke="#16865b" stroke-width="2"/>
+      <text x="83" y="37" text-anchor="middle" fill="#0b1b2b" font-size="18" font-weight="700">N6 return</text>
+      <text x="83" y="64" text-anchor="middle" fill="#5f6f80" font-size="14">route + NAT</text>
+    </g>
+
+    <g font-family="Arial, Segoe UI, sans-serif" font-size="14">
+      <path d="M442 274V332" stroke="#c43d4e" stroke-width="2"/>
+      <circle cx="442" cy="332" r="6" fill="#c43d4e"/>
+      <rect x="86" y="348" width="430" height="58" rx="3" fill="#fff7f8" stroke="#d9a2ab"/>
+      <text x="104" y="373" fill="#0b1b2b" font-weight="700">PLMN mismatch</text>
+      <text x="104" y="394" fill="#5f6f80">SCTP works; NG Setup returns foreign-PLMN cause.</text>
+
+      <rect x="86" y="420" width="430" height="58" rx="3" fill="#fff7f8" stroke="#d9a2ab"/>
+      <text x="104" y="445" fill="#0b1b2b" font-weight="700">TAC mismatch</text>
+      <text x="104" y="466" fill="#5f6f80">PLMN works; AMF cannot match the served TAI.</text>
+
+      <path d="M694 274V332" stroke="#c43d4e" stroke-width="2"/>
+      <circle cx="694" cy="332" r="6" fill="#c43d4e"/>
+      <rect x="585" y="348" width="330" height="130" rx="3" fill="#fff7f8" stroke="#d9a2ab"/>
+      <text x="603" y="377" fill="#0b1b2b" font-weight="700">Authentication-key mismatch</text>
+      <text x="603" y="402" fill="#5f6f80">Registration Request reaches AMF.</text>
+      <text x="603" y="424" fill="#5f6f80">AUTN MAC validation fails.</text>
+      <text x="603" y="446" fill="#5f6f80">No NAS Security Mode follows.</text>
+
+      <path d="M1198 274V332" stroke="#c43d4e" stroke-width="2"/>
+      <circle cx="1198" cy="332" r="6" fill="#c43d4e"/>
+      <rect x="951" y="348" width="344" height="130" rx="3" fill="#fff7f8" stroke="#d9a2ab"/>
+      <text x="969" y="377" fill="#0b1b2b" font-weight="700">Unsupported DNN</text>
+      <text x="969" y="402" fill="#5f6f80">Registration completes.</text>
+      <text x="969" y="424" fill="#5f6f80">Session authorization fails.</text>
+      <text x="969" y="446" fill="#5f6f80">No new PFCP session is created.</text>
+
+      <path d="M1429 274V332" stroke="#c43d4e" stroke-width="2"/>
+      <circle cx="1429" cy="332" r="6" fill="#c43d4e"/>
+      <rect x="1331" y="348" width="181" height="130" rx="3" fill="#fff7f8" stroke="#d9a2ab"/>
+      <text x="1349" y="377" fill="#0b1b2b" font-weight="700">Missing N6 NAT</text>
+      <text x="1349" y="402" fill="#5f6f80">Uplink GTP-U works.</text>
+      <text x="1349" y="424" fill="#5f6f80">Private source exits.</text>
+      <text x="1349" y="446" fill="#5f6f80">No reply returns.</text>
+    </g>
+
+    <g transform="translate(86 535)">
+      <line x1="0" y1="0" x2="1426" y2="0" stroke="#dce2e8"/>
+      <rect x="0" y="22" width="18" height="18" fill="#eaf0ff" stroke="#2457d6"/>
+      <text x="30" y="36" fill="#5f6f80" font-size="14">control-plane dependency</text>
+      <rect x="255" y="22" width="18" height="18" fill="#e8f5ef" stroke="#16865b"/>
+      <text x="285" y="36" fill="#5f6f80" font-size="14">session or user-plane dependency</text>
+      <circle cx="600" cy="31" r="6" fill="#c43d4e"/>
+      <text x="616" y="36" fill="#5f6f80" font-size="14">first failed boundary</text>
+      <text x="1426" y="36" text-anchor="end" fill="#16865b" font-size="14" font-weight="700">fault -> restore -> recovery capture</text>
+    </g>
+  </g>
+</svg>

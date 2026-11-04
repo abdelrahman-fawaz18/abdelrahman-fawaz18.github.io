@@ -1,0 +1,9 @@
+---
+import { local } from '../lib/urls';
+const { items, type } = Astro.props;
+---
+<div class:list={['personal-gallery', `gallery-${type}`]} data-viewer-gallery>
+  {items.map((item: any, index: number) => <figure style={`--ratio:${(item.width || 900) / (item.height || 1100)}`}>
+    {item.image ? <a class="gallery-image-link" data-image-viewer href={local(item.full || item.image)} aria-label={type === 'painting' ? `Open painting image ${index + 1}` : `Open photograph ${index + 1}: ${item.alt}`}><picture>{item.avif && <source type="image/avif" srcset={item.avifSmall ? `${local(item.avifSmall)} 640w, ${local(item.avif)} 1200w` : local(item.avif)} sizes="(max-width: 520px) 50vw, 500px" />}<img src={local(item.image)} srcset={item.small ? `${local(item.small)} 640w, ${local(item.image)} 1200w` : undefined} sizes="(max-width: 520px) 50vw, 500px" alt={item.alt} width={item.width || 900} height={item.height || 1100} loading={type === 'painting' && index < 4 ? 'eager' : 'lazy'} decoding="async" /></picture></a> : <div class:list={['gallery-placeholder', `placeholder-${index + 1}`]} role="img" aria-label={`Placeholder for ${type === 'painting' ? 'an original painting' : 'a personal photograph'}`}><span class="placeholder-corner" aria-hidden="true"></span><span class="eyebrow">{type === 'painting' ? 'On the canvas' : 'Through my lens'}</span><span class="placeholder-title">{item.title}</span><span class="placeholder-label">Image to come</span></div>}
+  </figure>)}
+</div>

@@ -1,0 +1,7 @@
+---
+const { role, expanded = false } = Astro.props;
+---
+<article class="teaching-entry">
+  <div class="teaching-title"><h3>{role.organization}</h3><p class="role-title">{role.title}</p><p class="role-dates">{role.dates}</p></div>
+  <div><p class="teaching-description">{role.description}</p>{role.courses.length > 4 && !expanded ? <details class="teaching-courses"><summary>Courses and laboratories <span>{role.courses.length}</span></summary><ul class="course-list">{role.courses.map((course: any) => <li><span class="course-code">{course.code}</span><span>{course.title}</span></li>)}</ul></details> : <ul class="course-list">{role.courses.map((course: any) => <li><span class="course-code">{course.code}</span><span>{course.title}</span></li>)}</ul>}</div>
+</article>

@@ -1,0 +1,110 @@
+---
+import { local } from '../lib/urls';
+---
+<dialog class="image-viewer" id="image-viewer" aria-label="Image viewer">
+  <div class="viewer-toolbar">
+    <span class="viewer-counter" aria-live="polite" aria-atomic="true"></span>
+    <button class="viewer-control viewer-close" type="button" aria-label="Close image viewer" autofocus>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+    </button>
+  </div>
+  <div class="viewer-stage">
+    <img class="viewer-image" alt="" width="1200" height="900" decoding="async" />
+  </div>
+  <div class="viewer-footer">
+    <button class="viewer-control viewer-previous" type="button" aria-label="Previous image"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h13" /></svg></button>
+    <p class="viewer-error" role="status" hidden>Full-size image unavailable. <a href={local('outside/')} class="viewer-original">Open original</a></p>
+    <button class="viewer-control viewer-next" type="button" aria-label="Next image"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m10 6 6 6-6 6M3 12h13" /></svg></button>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#image-viewer');
+  if (dialog && typeof dialog.showModal === 'function') {
+    const image = dialog.querySelector<HTMLImageElement>('.viewer-image')!;
+    const counter = dialog.querySelector<HTMLElement>('.viewer-counter')!;
+    const previous = dialog.querySelector<HTMLButtonElement>('.viewer-previous')!;
+    const next = dialog.querySelector<HTMLButtonElement>('.viewer-next')!;
+    const close = dialog.querySelector<HTMLButtonElement>('.viewer-close')!;
+    const error = dialog.querySelector<HTMLElement>('.viewer-error')!;
+    const original = dialog.querySelector<HTMLAnchorElement>('.viewer-original')!;
+    let links: HTMLAnchorElement[] = [];
+    let index = 0;
+    let trigger: HTMLAnchorElement | null = null;
+    let request = 0;
+
+    function showImage(position: number) {
+      index = (position + links.length) % links.length;
+      const link = links[index];
+      const thumbnail = link.querySelector('img')!;
+      const currentRequest = ++request;
+      image.alt = thumbnail.alt;
+      image.src = thumbnail.currentSrc || thumbnail.src;
+      counter.textContent = `${index + 1} / ${links.length}`;
+      previous.hidden = next.hidden = links.length < 2;
+      error.hidden = true;
+      original.href = link.href;
+      image.setAttribute('aria-busy', 'true');
+
+      // Keep the thumbnail visible while the retained full-size image loads.
+      const full = new Image();
+      full.decoding = 'async';
+      full.onload = () => {
+        if (request !== currentRequest || !dialog?.open) return;
+        image.src = full.src;
+        image.removeAttribute('aria-busy');
+      };
+      full.onerror = () => {
+        if (request !== currentRequest || !dialog?.open) return;
+        image.removeAttribute('aria-busy');
+        error.hidden = false;
+      };
+      full.src = link.href;
+    }
+
+    document.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[data-image-viewer]') : null;
+      if (!link || !link.querySelector('img')) return;
+      const gallery = link.closest('[data-viewer-gallery]');
+      links = gallery ? Array.from(gallery.querySelectorAll<HTMLAnchorElement>('a[data-image-viewer]')) : [link];
+      trigger = link;
+      event.preventDefault();
+      dialog.showModal();
+      document.documentElement.classList.add('image-viewer-open');
+      showImage(links.indexOf(link));
+    });
+
+    previous.addEventListener('click', () => showImage(index - 1));
+    next.addEventListener('click', () => showImage(index + 1));
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog || event.target === dialog.querySelector('.viewer-stage')) dialog.close();
+    });
+    dialog.addEventListener('keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.key === 'Tab') {
+        const controls = Array.from(dialog.querySelectorAll<HTMLElement>('button:not([hidden]), a[href]')).filter(control => control.getClientRects().length > 0);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        showImage(index + (event.key === 'ArrowRight' ? 1 : -1));
+      }
+    });
+    dialog.addEventListener('close', () => {
+      request++;
+      document.documentElement.classList.remove('image-viewer-open');
+      image.removeAttribute('src');
+      trigger?.focus({ preventScroll: true });
+    });
+  }
+</script>

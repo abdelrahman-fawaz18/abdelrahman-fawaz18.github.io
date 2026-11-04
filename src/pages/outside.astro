@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PersonalGallery from '../components/PersonalGallery.astro';
+import Recommendations from '../components/Recommendations.astro';
+import { paintings, photographs, music, films } from '../data/personal';
+---
+<BaseLayout title="Outside work — Abdelrahman Elsayed" description="Painting, photographs, music, and movies: a more personal side of Abdelrahman Elsayed." active="outside">
+  <header class="page-heading outside-heading"><p class="eyebrow">Outside work</p><h1>A different<br />side of me<span class="name-period">.</span></h1><p class="lead">Paint on a canvas, something good in my headphones, and a film worth talking about.</p></header>
+  <nav class="outside-nav" aria-label="Explore my interests"><a href="#paintings">Paintings</a><a href="#music">On repeat</a><a href="#films">Movie night</a><a href="#photographs">Photographs</a></nav>
+  <section class="personal-section" id="paintings" aria-labelledby="paintings-heading"><div class="personal-section-heading"><div><p class="eyebrow">01 · Made by hand</p><h2 id="paintings-heading">Away from the screen.</h2></div><p>I paint a lot. This is a small space for a few of my pieces.</p></div><PersonalGallery items={paintings} type="painting" /></section>
+  <div class="recommendation-columns">
+    <section class="personal-section" id="music" aria-labelledby="music-heading"><div class="personal-section-heading"><div><p class="eyebrow">02 · In my headphones</p><h2 id="music-heading">On repeat.</h2></div></div><p class="personal-section-intro">A few favorites I keep coming back to. Picked by me, not AI. Promise.</p><Recommendations items={music} type="music" /></section>
+    <section class="personal-section" id="films" aria-labelledby="films-heading"><div class="personal-section-heading"><div><p class="eyebrow">03 · Worth a watch</p><h2 id="films-heading">Movie night.</h2></div></div><p class="personal-section-intro">A few films I’d recommend watching.</p><Recommendations items={films} type="film" /></section>
+  </div>
+  <section class="personal-section" id="photographs" aria-labelledby="photographs-heading"><div class="personal-section-heading"><div><p class="eyebrow">04 · From everyday life</p><h2 id="photographs-heading">A few moments, kept.</h2></div><p>Places, people, and small things that caught my eye.</p></div><PersonalGallery items={photographs} type="photograph" /></section>
+</BaseLayout>

@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectPreview from '../../components/ProjectPreview.astro';
+import { projects } from '../../data/projects';
+---
+<BaseLayout title="Projects — Abdelrahman Elsayed" description="Projects across electronics, embedded sensing, communication networks, industrial systems, and simulation. Explore the details and available code." active="work">
+  <header class="page-heading projects-heading"><p class="eyebrow">Projects · {projects.length.toString().padStart(2, '0')}</p><h1>What I build<span class="name-period">.</span></h1><p class="lead">Electronics, software, and the systems that connect them. A closer look at my projects, from the hardware to the analysis.</p></header>
+  <div class="project-index-list">{projects.map(project => <ProjectPreview project={project} wide showRepository headingLevel="h2" />)}</div>
+</BaseLayout>

@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Arrow from '../components/Arrow.astro';
+import { local } from '../lib/urls';
+---
+<BaseLayout title="Page not found — Abdelrahman Elsayed" description="This page could not be found. Return to Abdelrahman Elsayed’s projects in electronics, communications, and systems.">
+  <section class="not-found"><p class="eyebrow">Page not found</p><h1>Wrong turn.</h1><p>The page may have moved, or the link may be incomplete. My selected projects are a good place to start.</p><a class="button" href={local('#work')}>Back to my work <Arrow /></a></section>
+</BaseLayout>

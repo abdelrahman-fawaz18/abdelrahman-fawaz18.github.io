@@ -1,0 +1,17 @@
+---
+import { local } from '../lib/urls';
+const { active = '' } = Astro.props;
+const links = [
+  { label: 'Projects', href: local('work/'), key: 'work' },
+  { label: 'About', href: local('about/'), key: 'about' },
+  { label: 'Publications', href: local('publications/'), key: 'publications' },
+  { label: 'Outside work', href: local('outside/'), key: 'outside' },
+  { label: 'Resume', href: local('resume/'), key: 'resume' },
+];
+---
+<header class="site-header">
+  <a class="identity" href={local()} aria-label="Abdelrahman Elsayed, home">Abdelrahman Elsayed</a>
+  <nav aria-label="Main navigation">
+    <ul>{links.map(link => <li><a href={link.href} aria-current={active === link.key ? 'page' : undefined}>{link.label}</a></li>)}</ul>
+  </nav>
+</header>

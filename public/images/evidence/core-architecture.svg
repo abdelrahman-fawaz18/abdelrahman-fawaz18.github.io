@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+  <title id="title">Validated 5G Standalone system architecture</title>
+  <desc id="desc">UERANSIM UE and gNB connect to Open5GS control and user plane functions across N1, N2, N3, N4 and N6.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#dce2e8" stroke-width="1"/></pattern>
+    <marker id="blueArrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2457d6"/></marker>
+    <marker id="greenArrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#16865b"/></marker>
+  </defs>
+  <rect width="1600" height="720" fill="#f4f6f8"/>
+  <rect width="1600" height="720" fill="url(#grid)"/>
+  <rect x="48" y="42" width="1504" height="636" rx="6" fill="#ffffff" stroke="#c4cdd7"/>
+  <text x="88" y="91" fill="#0b1b2b" font-family="Arial Narrow, Arial, Segoe UI, sans-serif" font-size="28" font-weight="700">Validated system boundary</text>
+  <text x="88" y="121" fill="#5f6f80" font-family="Arial, Segoe UI, sans-serif" font-size="16">Single Ubuntu host / protocol-realistic control and user planes / synthetic UE identity</text>
+
+  <g font-family="Arial Narrow, Arial, Segoe UI, sans-serif">
+    <text x="90" y="170" fill="#64748b" font-size="14" font-weight="700" letter-spacing="2">UERANSIM</text>
+    <rect x="88" y="198" width="190" height="110" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <text x="183" y="239" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">UE</text>
+    <text x="183" y="269" text-anchor="middle" fill="#5f6f80" font-size="15">NAS + uesimtun0</text>
+
+    <rect x="354" y="198" width="190" height="110" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <text x="449" y="239" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">gNB</text>
+    <text x="449" y="269" text-anchor="middle" fill="#5f6f80" font-size="15">NGAP + GTP-U</text>
+    <line x1="278" y1="253" x2="346" y2="253" stroke="#64748b" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="312" y="239" text-anchor="middle" fill="#64748b" font-size="13">RLS</text>
+
+    <text x="652" y="170" fill="#64748b" font-size="14" font-weight="700" letter-spacing="2">OPEN5GS CONTROL PLANE</text>
+    <rect x="650" y="198" width="178" height="110" rx="4" fill="#eaf0ff" stroke="#2457d6" stroke-width="2"/>
+    <text x="739" y="239" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">AMF</text>
+    <text x="739" y="269" text-anchor="middle" fill="#5f6f80" font-size="15">NG-RAN + NAS</text>
+
+    <rect x="906" y="198" width="178" height="110" rx="4" fill="#ffffff" stroke="#2457d6" stroke-width="2"/>
+    <text x="995" y="239" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">AUSF / UDM</text>
+    <text x="995" y="269" text-anchor="middle" fill="#5f6f80" font-size="15">5G-AKA</text>
+
+    <rect x="1162" y="198" width="300" height="110" rx="4" fill="#ffffff" stroke="#2457d6" stroke-width="2"/>
+    <text x="1312" y="239" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">NRF / NSSF / PCF / UDR</text>
+    <text x="1312" y="269" text-anchor="middle" fill="#5f6f80" font-size="15">discovery + slice + policy + data</text>
+
+    <line x1="544" y1="253" x2="642" y2="253" stroke="#2457d6" stroke-width="3" marker-end="url(#blueArrow)"/>
+    <text x="593" y="232" text-anchor="middle" fill="#2457d6" font-size="14" font-weight="700">N2 / NGAP / SCTP</text>
+    <line x1="828" y1="253" x2="898" y2="253" stroke="#2457d6" stroke-width="2" marker-end="url(#blueArrow)"/>
+    <line x1="1084" y1="253" x2="1154" y2="253" stroke="#2457d6" stroke-width="2" marker-end="url(#blueArrow)"/>
+
+    <text x="652" y="389" fill="#64748b" font-size="14" font-weight="700" letter-spacing="2">SESSION CONTROL</text>
+    <rect x="650" y="416" width="178" height="110" rx="4" fill="#eaf0ff" stroke="#2457d6" stroke-width="2"/>
+    <text x="739" y="457" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">SMF</text>
+    <text x="739" y="487" text-anchor="middle" fill="#5f6f80" font-size="15">session + PFCP</text>
+
+    <text x="906" y="389" fill="#64748b" font-size="14" font-weight="700" letter-spacing="2">USER PLANE</text>
+    <rect x="906" y="416" width="178" height="110" rx="4" fill="#e8f5ef" stroke="#16865b" stroke-width="2"/>
+    <text x="995" y="457" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">UPF</text>
+    <text x="995" y="487" text-anchor="middle" fill="#5f6f80" font-size="15">GTP-U + ogstun</text>
+
+    <rect x="1240" y="416" width="222" height="110" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <text x="1351" y="457" text-anchor="middle" fill="#0b1b2b" font-size="20" font-weight="700">Data network</text>
+    <text x="1351" y="487" text-anchor="middle" fill="#5f6f80" font-size="15">IPv4 / ICMP target</text>
+
+    <path d="M449 308V552H868V471H898" fill="none" stroke="#16865b" stroke-width="3" marker-end="url(#greenArrow)"/>
+    <text x="552" y="542" fill="#16865b" font-size="14" font-weight="700">N3 / GTP-U / UDP 2152</text>
+    <line x1="828" y1="471" x2="898" y2="471" stroke="#2457d6" stroke-width="3" marker-end="url(#blueArrow)"/>
+    <text x="863" y="449" text-anchor="middle" fill="#2457d6" font-size="14" font-weight="700">N4</text>
+    <line x1="1084" y1="471" x2="1232" y2="471" stroke="#16865b" stroke-width="3" marker-end="url(#greenArrow)"/>
+    <text x="1158" y="449" text-anchor="middle" fill="#16865b" font-size="14" font-weight="700">N6 / IPv4</text>
+
+    <path d="M650 276H607V359H183V316" fill="none" stroke="#2457d6" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="410" y="349" text-anchor="middle" fill="#2457d6" font-size="14" font-weight="700">N1 / NAS (logical, transported through gNB)</text>
+
+    <g transform="translate(88 588)">
+      <line x1="0" y1="0" x2="1374" y2="0" stroke="#dce2e8"/>
+      <circle cx="10" cy="38" r="7" fill="#2457d6"/>
+      <text x="29" y="43" fill="#5f6f80" font-size="15">Control-plane evidence: SCTP, NGAP, NAS-5GS, PFCP</text>
+      <circle cx="535" cy="38" r="7" fill="#16865b"/>
+      <text x="554" y="43" fill="#5f6f80" font-size="15">User-plane evidence: GTP-U, inner IPv4, N6 translation</text>
+      <circle cx="1080" cy="38" r="7" fill="#64748b"/>
+      <text x="1099" y="43" fill="#5f6f80" font-size="15">All endpoints local except test target</text>
+    </g>
+  </g>
+</svg>

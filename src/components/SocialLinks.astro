@@ -1,0 +1,13 @@
+---
+import SocialIcon from './SocialIcon.astro';
+import { github, linkedin, email } from '../lib/urls';
+const { label = 'Find me online' } = Astro.props;
+const links = [
+  { name: 'GitHub', icon: 'github', href: github },
+  { name: 'LinkedIn', icon: 'linkedin', href: linkedin },
+  { name: 'Email', icon: 'mail', href: `mailto:${email}` },
+];
+---
+<div class="social-links" role="group" aria-label={label}>
+  {links.map(link => <a href={link.href} class="social-link" aria-label={link.name} title={link.name}><SocialIcon name={link.icon} /></a>)}
+</div>

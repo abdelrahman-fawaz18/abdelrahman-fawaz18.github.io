@@ -1,0 +1,25 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Arrow from '../components/Arrow.astro';
+import { local } from '../lib/urls';
+import { projects } from '../data/projects';
+import media from '../data/media.json';
+const front = Astro.props.frontmatter;
+const current = projects.findIndex(project => project.slug === front.slug);
+const next = projects[(current + 1) % projects.length];
+---
+<BaseLayout title={`${front.title} — Abdelrahman Elsayed`} description={front.summary} active="work">
+  <header class="page-heading case-heading">
+    <a class="back-link" href={local('work/')}><Arrow /> All projects</a>
+    <p class="eyebrow">{front.category} · {front.year}</p>
+    <h1>{front.title}</h1><p class="lead">{front.summary}</p>
+    <dl class="case-meta"><div><dt>My role</dt><dd>{front.role}</dd></div><div><dt>Environment</dt><dd>{front.environment}</dd></div><div><dt>Tools</dt><dd>{front.tools}</dd></div></dl>
+    <div class="case-links">{front.repository && <a class="text-link" href={front.repository}>Explore the code <Arrow diagonal /></a>}{front.report && <a class="text-link" href={front.report}>{front.reportLabel || 'Read the report'} <Arrow diagonal /></a>}</div>
+  </header>
+  <article class="case-body" data-viewer-gallery>
+    <slot />
+    {front.figures?.length > 0 && <><h2>A closer look</h2>{front.figures.map((figure: any) => <figure class:list={{ 'dark-figure': figure.dark }}><a data-image-viewer href={local(`images/evidence/${figure.file}`)} aria-label={`Open full-size figure: ${figure.alt}`}><img src={local(`images/evidence/${figure.file}`)} alt={figure.alt} width={media[figure.file as keyof typeof media]?.width} height={media[figure.file as keyof typeof media]?.height} loading="lazy" decoding="async" /></a><figcaption>{figure.caption} <a href={figure.source}>View source</a>.</figcaption></figure>)}</>}
+    {front.evidence?.length > 0 && <><h2>Related links</h2><ul class="evidence-links">{front.evidence.map((item: any) => <li><a href={item.url}>{item.label}<Arrow diagonal /></a></li>)}</ul></>}
+  </article>
+  <nav class="case-bottom" aria-label="More projects"><a class="text-link" href={local('work/')}><Arrow class="back-arrow" /> All projects</a><div><p class="eyebrow">Next project</p><a class="text-link" href={local(`work/${next.slug}/`)}>{next.shortTitle}<Arrow /></a></div></nav>
+</BaseLayout>
