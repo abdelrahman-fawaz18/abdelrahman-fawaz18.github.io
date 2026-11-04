@@ -2,7 +2,7 @@
 
 Personal portfolio covering electronics, communications, embedded sensing, and system validation.
 
-Website: **https://abdelrahman-fawaz18.github.io/**
+Website: **https://abdelrahman-elsayed.com/**
 
 Built with Astro, custom CSS, self-hosted typography, and optimized local images. No analytics, database, or external font service is required.
 
@@ -29,7 +29,7 @@ Local builds disable search indexing by default. Set `PUBLIC_SITE_LIVE=true` for
 
 The `Publish portfolio` workflow builds and checks the site, then deploys `dist/` to GitHub Pages on every push to `main`. It can also run manually from the Actions tab. Repository Settings → Pages must use **GitHub Actions** as its publishing source.
 
-The user-site repository serves from `/`; no repository subpath is required. The workflow enables indexing and validates the sitemap, canonical URLs, page links, and assets before deployment.
+The user-site repository serves from `/`; no repository subpath is required. Its custom domain is `abdelrahman-elsayed.com`, with `www.abdelrahman-elsayed.com` redirecting to the apex domain. GitHub Pages hosts the site; Spaceship manages the domain and DNS. The workflow enables indexing and validates the sitemap, canonical and sharing URLs, page links, and assets before deployment.
 
 ## Content
 
