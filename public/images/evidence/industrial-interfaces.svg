@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="500" viewBox="0 0 1080 500" role="img" aria-labelledby="title desc">
+  <title id="title">Industrial lab interface validation</title>
+  <desc id="desc">Illustration of integration scope across sensors, PLC control and equipment. The blocks are conceptual.</desc>
+  <defs>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#eee4da" stroke-opacity=".10"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="500" fill="#252725"/>
+  <rect width="1080" height="500" fill="url(#grid)"/>
+  <g font-family="Arial,sans-serif" fill="#eee4da">
+    <text x="65" y="73" font-size="25" fill="#d8c4ac" letter-spacing="3">INDUSTRIAL INTERFACES</text>
+    <rect x="61" y="146" width="280" height="226" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><rect x="400" y="146" width="280" height="226" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><rect x="739" y="146" width="280" height="226" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/>
+    <path d="M352 251h37m-12-10 12 10-12 10" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><path d="M691 251h37m-12-10 12 10-12 10" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M161 249a39 39 0 1 1 80 0m-68-3a28 28 0 0 1 56 0m-43-1a15 15 0 0 1 30 0" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M496 205h88v62h-88zm11 13h10m10 0h10m10 0h10m10 0h5m-66 28h65" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M841 272h78m-62 0v-34l36-27 27 17m-27-17 11-27 22 8m-6 36 16-15 13 6" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="201" y="330" font-size="33" text-anchor="middle" font-weight="700">Sensors</text><text x="540" y="330" font-size="33" text-anchor="middle" font-weight="700">PLC control</text><text x="879" y="330" font-size="33" text-anchor="middle" font-weight="700">Equipment</text>
+    <text x="63" y="438" font-size="27" fill="#d8c4ac">RFID  /  Cameras  /  Optical and proximity sensing</text>
+
+  </g>
+</svg>

@@ -10,6 +10,14 @@ environment: Testbed-to-lab telemetry integration and a separate simulation stud
 tools: MQTT-based telemetry, ns-3 / 5G-LENA, Python, and C++
 report: https://doi.org/10.1108/JQME-06-2026-0131
 reportLabel: Read the published article
+finding: In the simulated scenarios, giving maintenance alerts and fault reports priority improved their delivery during congestion.
+contribution: I connected the EV motor testbed to the ICPS Lab using MQTT and built a separate ns-3/5G-LENA experiment to compare network treatment for different message types.
+leadFigure:
+  file: ev-telemetry-overview.svg
+  alt: A schematic separates MQTT telemetry integration between the motor testbed and lab from the simulation of three maintenance traffic classes.
+  caption: Project schematic showing the implemented telemetry path and the separate QoS experiment.
+  dark: true
+  source: https://doi.org/10.1108/JQME-06-2026-0131
 figures:
   - file: ev-traffic-classes.svg
     alt: Three maintenance traffic classes, routine diagnostics, maintenance alerts, and fault reports, mapped to differentiated QoS treatment in a simulation.

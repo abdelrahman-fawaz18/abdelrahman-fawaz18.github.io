@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="500" viewBox="0 0 1080 500" role="img" aria-labelledby="title desc">
+  <title id="title">BLE indoor localization</title>
+  <desc id="desc">Illustrative trilateration geometry. The circle intersections illustrate position estimation from BLE observations and carry no measurements.</desc>
+  <defs>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#eee4da" stroke-opacity=".10"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="500" fill="#222a26"/>
+  <rect width="1080" height="500" fill="url(#grid)"/>
+  <g font-family="Arial,sans-serif" fill="#eee4da">
+    <text x="65" y="73" font-size="25" fill="#d8c4ac" letter-spacing="3">INDOOR LOCALIZATION</text>
+    <text x="65" y="160" font-size="48" font-weight="700">BLE observations</text>
+    <path d="M74 217h115m-12-10 12 10-12 10" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="65" y="286" font-size="47" font-weight="700">Position estimate</text>
+    <text x="65" y="358" font-size="28" fill="#d8c4ac">ESP32  /  Trilateration</text>
+    <g fill="none" stroke="#a6af87" stroke-width="3" stroke-opacity=".82">
+      <circle cx="664" cy="189" r="132.5"/><circle cx="902" cy="174" r="145.3"/><circle cx="799" cy="375" r="123.5"/>
+    </g>
+    <g fill="#eee4da"><circle cx="664" cy="189" r="8"/><circle cx="902" cy="174" r="8"/><circle cx="799" cy="375" r="8"/></g>
+    <circle cx="780" cy="253" r="17" fill="#c8a49f" stroke="#171714" stroke-width="4"/>
+    <path d="M780 253h34l49 35h90" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="959" y="297" font-size="27" >Tag</text>
+
+  </g>
+</svg>

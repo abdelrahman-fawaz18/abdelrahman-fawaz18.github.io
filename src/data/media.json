@@ -1,4 +1,16 @@
 {
+  "antenna-workflow.svg": {
+    "width": 1080,
+    "height": 500
+  },
+  "ble-workflow.svg": {
+    "width": 1080,
+    "height": 500
+  },
+  "cloud-recovery-preview.webp": {
+    "width": 1080,
+    "height": 500
+  },
   "cloud-recovery.png": {
     "width": 1265,
     "height": 485
@@ -23,9 +35,29 @@
     "width": 1600,
     "height": 650
   },
+  "core-packet-trace.webp": {
+    "width": 1280,
+    "height": 690
+  },
+  "cv2x-road-layouts.webp": {
+    "width": 756,
+    "height": 414
+  },
+  "ev-telemetry-overview.svg": {
+    "width": 1080,
+    "height": 500
+  },
   "ev-traffic-classes.svg": {
     "width": 1200,
     "height": 640
+  },
+  "failure-classification.svg": {
+    "width": 1080,
+    "height": 500
+  },
+  "industrial-interfaces.svg": {
+    "width": 1080,
+    "height": 500
   },
   "nr-load-response.svg": {
     "width": 1600,
@@ -34,5 +66,25 @@
   "nr-topology.svg": {
     "width": 1600,
     "height": 850
+  },
+  "production-model.svg": {
+    "width": 1080,
+    "height": 500
+  },
+  "wearable-monitoring.webp": {
+    "width": 742,
+    "height": 319
+  },
+  "wearable-pcb.webp": {
+    "width": 1023,
+    "height": 233
+  },
+  "wearable-prototype-640.webp": {
+    "width": 640,
+    "height": 360
+  },
+  "wearable-prototype.webp": {
+    "width": 1280,
+    "height": 720
   }
 }

@@ -20,6 +20,11 @@ figures:
     alt: Five controlled faults arranged by the last successful and first failed stage of the service chain.
     caption: A summary of the fault campaign. The packet maps and recovery captures linked below provide the underlying observations.
     source: https://github.com/abdelrahman-fawaz18/5g-sa-core-protocol-lab/blob/82934c2cc231540fa425e48177d4bed33210bfc1/docs/assets/fault-localization.svg
+  - file: core-packet-trace.webp
+    alt: Saved Wireshark capture showing PFCP session setup and tunneled GTP-U echo traffic in the 5G lab.
+    caption: Saved packet capture of the working baseline, showing control-plane session signaling and user-plane traffic.
+    dark: true
+    source: https://github.com/abdelrahman-fawaz18/5g-sa-core-protocol-lab/blob/82934c2cc231540fa425e48177d4bed33210bfc1/docs/assets/evidence/wireshark-pfcp-gtpu.png
 evidence:
   - label: Protocol analysis and packet frame maps
     url: https://github.com/abdelrahman-fawaz18/5g-sa-core-protocol-lab/blob/main/docs/protocol-analysis.md

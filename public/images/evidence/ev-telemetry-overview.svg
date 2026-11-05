@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="500" viewBox="0 0 1080 500" role="img" aria-labelledby="title desc">
+  <title id="title">EV testbed telemetry and QoS simulation</title>
+  <desc id="desc">Motor testbed readings are exchanged over MQTT with the lab. A separate simulation compares routine diagnostics, maintenance alerts and fault reports.</desc>
+  <defs>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#eee4da" stroke-opacity=".10"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="500" fill="#252a20"/>
+  <rect width="1080" height="500" fill="url(#grid)"/>
+  <g font-family="Arial,sans-serif" fill="#eee4da">
+    <text x="65" y="73" font-size="25" fill="#d8c4ac" letter-spacing="3">TESTBED INTEGRATION</text>
+    <rect x="64" y="105" width="290" height="95" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><rect x="404" y="105" width="270" height="95" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><rect x="724" y="105" width="292" height="95" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/>
+    <text x="209" y="164" font-size="33" text-anchor="middle" font-weight="700">EV testbed</text><text x="539" y="164" font-size="33" text-anchor="middle" font-weight="700">MQTT</text><text x="870" y="164" font-size="33" text-anchor="middle" font-weight="700">ICPS Lab</text>
+    <path d="M366 153h27m-12-10 12 10-12 10" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><path d="M686 153h27m-12-10 12 10-12 10" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M64 242h952" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="65" y="296" font-size="25" fill="#d8c4ac" letter-spacing="3">SEPARATE QoS SIMULATION</text>
+    <rect x="64" y="327" width="290" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><rect x="404" y="327" width="270" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><rect x="724" y="327" width="292" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/>
+    <text x="209" y="384" font-size="33" text-anchor="middle" font-weight="700">Diagnostics</text><text x="539" y="384" font-size="33" text-anchor="middle" font-weight="700">Alerts</text><text x="870" y="384" font-size="33" text-anchor="middle" font-weight="700">Fault reports</text>
+    <text x="65" y="466" font-size="27" fill="#d8c4ac">Compare delivery and latency under background load</text>
+
+  </g>
+</svg>

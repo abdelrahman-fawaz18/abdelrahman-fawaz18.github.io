@@ -2,16 +2,22 @@
 import Arrow from './Arrow.astro';
 import SocialIcon from './SocialIcon.astro';
 import { local } from '../lib/urls';
+import { projectMedia } from '../data/project-media';
+import media from '../data/media.json';
 const { project, wide = false, showRepository = false, headingLevel = 'h3' } = Astro.props;
 const Heading = headingLevel;
+const cover = projectMedia[project.slug];
+const imagePath = local(`images/evidence/${cover.file}`);
+const size = media[cover.file as keyof typeof media];
+const srcset = cover.small ? `${local(`images/evidence/${cover.small}`)} 640w, ${imagePath} ${size.width}w` : undefined;
 ---
 <article class:list={['project-preview', { 'project-wide': wide }]}>
-  <a class:list={['project-art', `art-${project.cover}`]} href={local(`work/${project.slug}/`)} aria-label={`Read about ${project.title}`} tabindex="-1">
-    <picture>
-      <source type="image/avif" srcset={`${local(`images/covers/${project.cover}-640.avif`)} 640w, ${local(`images/covers/${project.cover}-1280.avif`)} 1280w`} sizes={wide ? '(max-width: 700px) 100vw, 1200px' : '(max-width: 700px) 100vw, 720px'} />
-      <img src={local(`images/covers/${project.cover}-1280.webp`)} srcset={`${local(`images/covers/${project.cover}-640.webp`)} 640w, ${local(`images/covers/${project.cover}-1280.webp`)} 1280w`} sizes={wide ? '(max-width: 700px) 100vw, 1200px' : '(max-width: 700px) 100vw, 720px'} width="1280" height="853" loading={wide || project.number > '03' ? 'lazy' : 'eager'} decoding="async" alt="" />
-    </picture>
-  </a>
+  <figure class="project-visual">
+    <a class:list={['project-art', `art-${cover.tone}`]} href={local(`work/${project.slug}/`)} aria-label={`Read about ${project.title}`} tabindex="-1">
+      <img src={imagePath} srcset={srcset} sizes={srcset && '(max-width: 700px) 100vw, 1200px'} width={size.width} height={size.height} loading="lazy" decoding="async" alt={cover.alt} />
+    </a>
+    <figcaption>{cover.caption}{cover.credit && <> · <a href={cover.credit.href}>{cover.credit.text}</a></>}</figcaption>
+  </figure>
   <div class="project-caption">
     <div><p class="project-meta">{project.category}<span aria-hidden="true"> · </span>{project.tools}</p><Heading><a href={local(`work/${project.slug}/`)}>{project.title}</a></Heading><p class="project-description">{project.description}</p></div>
     <div class="project-actions"><a class="text-link" href={local(`work/${project.slug}/`)} aria-label={`View project: ${project.title}`}>View project <Arrow /></a>{showRepository && project.repository && <a class="repo-link" href={project.repository} aria-label={`GitHub repository: ${project.title}`}><SocialIcon name="github" /> GitHub <Arrow diagonal /></a>}</div>

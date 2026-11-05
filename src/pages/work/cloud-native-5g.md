@@ -11,17 +11,20 @@ tools: Kubernetes, Helm, Open5GS, UERANSIM, Prometheus, Grafana, and Python
 repository: https://github.com/abdelrahman-fawaz18/cloud-native-5g-core-platform
 report: https://github.com/abdelrahman-fawaz18/cloud-native-5g-core-platform/blob/main/reports/resilience-results.md
 reportLabel: Read the recovery results
+finding: Restoring 5G service required operator assistance in all nine accepted recovery trials in my local Kubernetes lab.
+contribution: I built the Helm deployment, service probes, and observability setup. I used them to track Pod readiness and the return of user traffic as separate events.
+leadFigure:
+  file: cloud-recovery.webp
+  alt: Saved Grafana dashboard showing nine accepted component trials, zero automatic recoveries, and nine assisted recoveries.
+  caption: Saved lab capture. Kubernetes Pod readiness and restored 5G service were measured separately.
+  dark: true
+  source: https://github.com/abdelrahman-fawaz18/cloud-native-5g-core-platform/blob/fd7b03444dd2285ee72f38aac4716a7fd3741889/reports/resilience-results.md
 figures:
   - file: cloud-sessions.webp
     alt: Saved Grafana view correlating five synthetic UE sessions, their DNNs, and successful source-bound user-plane probes.
     caption: Saved, sanitized lab capture showing three UEs on the internet DNN and two on enterprise, alongside source-bound connectivity checks.
     dark: true
     source: https://github.com/abdelrahman-fawaz18/cloud-native-5g-core-platform/blob/fd7b03444dd2285ee72f38aac4716a7fd3741889/docs/dashboard-gallery.md
-  - file: cloud-recovery.webp
-    alt: Saved recovery dashboard separating detection, Pod readiness, service restoration, and disruption for AMF, SMF, and UPF trials.
-    caption: Recovery campaign summary separating Pod readiness from restored 5G service. All accepted component trials required operator-assisted restoration.
-    dark: true
-    source: https://github.com/abdelrahman-fawaz18/cloud-native-5g-core-platform/blob/fd7b03444dd2285ee72f38aac4716a7fd3741889/reports/resilience-results.md
 evidence:
   - label: Complete system architecture
     url: https://github.com/abdelrahman-fawaz18/cloud-native-5g-core-platform/blob/main/docs/architecture/complete-system-architecture.md

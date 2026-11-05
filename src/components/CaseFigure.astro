@@ -1,0 +1,25 @@
+---
+import { local } from '../lib/urls';
+import media from '../data/media.json';
+
+interface Props {
+  figure: {
+    file: keyof typeof media;
+    alt: string;
+    caption: string;
+    source: string;
+    dark?: boolean;
+  };
+  lead?: boolean;
+}
+
+const { figure, lead = false } = Astro.props;
+const url = local(`images/evidence/${figure.file}`);
+const { width, height } = media[figure.file];
+---
+<figure class:list={['case-figure', { 'dark-figure': figure.dark }]}>
+  <a data-image-viewer href={url} aria-label={`Open full-size figure: ${figure.alt}`}>
+    <img src={url} alt={figure.alt} width={width} height={height} loading={lead ? 'eager' : 'lazy'} decoding="async" />
+  </a>
+  <figcaption>{figure.caption} <a href={figure.source}>View source</a>.</figcaption>
+</figure>

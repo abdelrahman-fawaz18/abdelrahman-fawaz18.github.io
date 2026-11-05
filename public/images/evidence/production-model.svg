@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="500" viewBox="0 0 1080 500" role="img" aria-labelledby="title desc">
+  <title id="title">Eight-station production-line model</title>
+  <desc id="desc">Three part streams enter a schematic row of eight modeled stations. The layout illustrates the model scope without specifying the real plant topology.</desc>
+  <defs>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#eee4da" stroke-opacity=".10"/>
+    </pattern>
+  </defs>
+  <rect width="1080" height="500" fill="#302922"/>
+  <rect width="1080" height="500" fill="url(#grid)"/>
+  <g font-family="Arial,sans-serif" fill="#eee4da">
+    <text x="65" y="73" font-size="25" fill="#d8c4ac" letter-spacing="3">ELECTRONICS PRODUCTION</text>
+    <text x="63" y="153" font-size="47" font-weight="700">Eight-station model</text>
+    <g fill="none" stroke="#d8c4ac" stroke-width="3">
+      <path d="M66 232h56l38 49h55M66 281h149M66 330h56l38-49"/>
+    </g>
+    <g fill="#c8a49f"><circle cx="65" cy="232" r="7"/><circle cx="65" cy="281" r="7"/><circle cx="65" cy="330" r="7"/></g>
+    <rect x="227" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="265" y="293" font-size="31" text-anchor="middle" font-weight="700">01</text><rect x="325" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="363" y="293" font-size="31" text-anchor="middle" font-weight="700">02</text><rect x="423" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="461" y="293" font-size="31" text-anchor="middle" font-weight="700">03</text><rect x="521" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="559" y="293" font-size="31" text-anchor="middle" font-weight="700">04</text><rect x="619" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="657" y="293" font-size="31" text-anchor="middle" font-weight="700">05</text><rect x="717" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="755" y="293" font-size="31" text-anchor="middle" font-weight="700">06</text><rect x="815" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="853" y="293" font-size="31" text-anchor="middle" font-weight="700">07</text><rect x="913" y="235" width="77" height="92" rx="14" fill="#171714" stroke="#d8c4ac" stroke-opacity=".35"/><text x="951" y="293" font-size="31" text-anchor="middle" font-weight="700">08</text>
+    <path d="M222 353h778" fill="none" stroke="#d8c4ac" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="66" y="433" font-size="32" fill="#d8c4ac">Compare buffers, pallets, and batch sizes</text>
+
+  </g>
+</svg>

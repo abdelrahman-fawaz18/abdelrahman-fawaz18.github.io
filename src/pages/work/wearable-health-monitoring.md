@@ -8,7 +8,27 @@ year: '2021–2023'
 role: Contributor to a collaborative wearable-sensing project
 environment: Research prototype and classification workflows
 tools: Raspberry Pi Zero W, I2C sensors, Python, Node-RED, SVM, and Random Forest
+repository: https://github.com/abdelrahman-fawaz18/iot-smart-wearable-health-monitor
+findingLabel: What the team built
+finding: The wrist-worn prototype combined motion and vital-sign sensing with remote monitoring. The team published three papers on the system, fall detection, and sleep tracking.
+contribution: I contributed to the collaborative sensing and analysis work, connecting embedded acquisition to the preparation of sensor data for classification.
+leadFigure:
+  file: wearable-prototype.webp
+  alt: The green wearable prototype enclosure and black strap on a wrist, with the Raspberry Pi ports visible along one side.
+  caption: The team's wrist-mounted research prototype.
+  source: https://github.com/abdelrahman-fawaz18/wearable-fall-detection/blob/29dbf97b7e3f6952a3c3550a5f293b04ead65794/docs/assets/device-on-wrist.jpg
+figures:
+  - file: wearable-pcb.webp
+    alt: Routing diagrams for the two layers of the wearable prototype's interconnect board.
+    caption: The prototype's interconnect board routed the shared I2C bus between the Raspberry Pi and the sensors.
+    source: https://github.com/abdelrahman-fawaz18/iot-smart-wearable-health-monitor/blob/c905e9ce8b380464792ce07c48cf8d7fd6ea029e/docs/hardware.md
+  - file: wearable-monitoring.webp
+    alt: Node-RED temperature flow with sensor input, visualization, and CSV logging branches.
+    caption: The project's Node-RED temperature flow for processing, display, and logging.
+    source: https://github.com/abdelrahman-fawaz18/iot-smart-wearable-health-monitor/blob/c905e9ce8b380464792ce07c48cf8d7fd6ea029e/docs/assets/node-red-temperature-flow.png
 evidence:
+  - label: Fall-detection code and experiment notes
+    url: https://github.com/abdelrahman-fawaz18/wearable-fall-detection
   - label: IoT-based wearable system — 2021 publication
     url: https://doi.org/10.1109/JAC-ECC54461.2021.9691431
   - label: Fall detection — 2023 publication
