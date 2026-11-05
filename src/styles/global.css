@@ -315,25 +315,15 @@ nav a[aria-current=page] {
 .project-wide {
   grid-column:1/-1
 }
-.project-visual {
-  margin:0;
-  min-width:0
-}
-.project-visual figcaption {
-  margin-top:9px;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5
-}
 .project-art {
   display:block;
   position:relative;
   isolation:isolate;
   border-radius:var(--radius);
   overflow:hidden;
-  height:clamp(216px,22vw,312px);
+  height:clamp(180px,19vw,260px);
   aspect-ratio:auto;
-  background:#191a17
+  background:#282923
 }
 .project-art:after {
   content:'';
@@ -343,28 +333,32 @@ nav a[aria-current=page] {
   border-radius:inherit;
   pointer-events:none
 }
-.project-art img {
+.project-art picture {
   display:block;
+  width:100%;
+  height:100%
+}
+.project-art img {
   height:100%;
   width:100%;
-  object-fit:contain
-}
-.project-art.art-paper {
-  background:#f7f7f3
-}
-.project-art.art-dark {
-  background:#191a17
-}
-.project-art.art-photo img {
   object-fit:cover;
-  object-position:center 10%;
   transition:transform .35s ease
 }
-.project-preview:hover .art-photo img {
+.art-core {
+  background:#35352e
+}
+.art-cloud {
+  background:var(--merlot)
+}
+.art-ev {
+  background:#353b2b
+}
+.project-preview:hover .project-art img {
   transform:scale(1.018)
 }
 .project-wide .project-art {
-  height:clamp(220px,25vw,324px)
+  height:auto;
+  aspect-ratio:6.5
 }
 .project-caption {
   margin-top:14px;
@@ -1146,7 +1140,7 @@ nav a[aria-current=page] {
   }
   .project-art,.project-wide .project-art {
     height:auto;
-    aspect-ratio:1.9
+    aspect-ratio:1.8
   }
   .case-highlight { grid-template-columns:minmax(0,1fr); gap:18px; }
   .case-highlight .case-figure { padding:8px; }
@@ -1466,6 +1460,8 @@ nav a[aria-current=page] {
 .project-index-list { display: grid; gap: 48px; margin-top: 22px; }
 .project-index-list .project-caption { align-items: flex-start; }
 .project-index-list .project-actions { flex-direction: column; align-items: flex-end; padding-top: 7px; gap: 14px; }
+.project-index-list .project-art img { object-position: center 55%; }
+.project-index-list .project-preview:nth-child(3n+2) .project-art img { object-position: center 35%; }
 .projects-heading .lead { max-width: 730px; }
 .outside-teaser { margin-top: 48px; padding: 30px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .outside-teaser h2 { font-size: 30px; margin: 10px 0; }
@@ -1927,10 +1923,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-even
   .gallery-photograph .gallery-image-link { border-radius: 9px; }
 }
 
-/* Keep the archive compact while giving project figures room to read. */
-@media(min-width:701px) {
-  .project-index-list .project-art { height:clamp(220px,24vw,300px); }
-}
+/* Smaller covers keep the complete project collection easy to scan. */
+.project-index-list .project-art { aspect-ratio: 10; }
+@media(max-width:700px) { .project-index-list .project-art { aspect-ratio: 3.2; } }
 
 /* One quiet viewer for paintings, photographs, and project figures. */
 html { scrollbar-gutter: stable; }
