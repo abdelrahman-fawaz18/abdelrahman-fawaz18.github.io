@@ -2,10 +2,36 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Arrow from '../components/Arrow.astro';
 import { publications } from '../data/publications';
+import { projects } from '../data/projects';
+import { local } from '../lib/urls';
 ---
 <BaseLayout title="Publications — Abdelrahman Elsayed" description="Published research on 5G QoS for EV maintenance telemetry and collaborative wearable IoT sensing work." active="publications">
   <header class="page-heading"><p class="eyebrow">Published work</p><h1>Research &amp;<br />publications.</h1><p class="lead">Journal and conference papers on communication systems, EV maintenance, and wearable sensing.</p></header>
-  <div class="publication-list">{publications.map(publication => <article class="publication"><div><p class="pub-year">{publication.year}</p><p class="pub-status">Published</p></div><div><h2>{publication.title}</h2><p class="authors">{publication.authors}</p><p class="venue">{publication.venue}</p><p class="pub-note">{publication.description}</p><a class="text-link" href={publication.url}>{publication.linkLabel || 'View publication'} <Arrow diagonal /></a></div></article>)}</div>
+  <div class="publication-list">
+    {publications.map(publication => {
+      const project = projects.find(project => project.slug === publication.project);
+      return (
+        <article class="publication">
+          <div><p class="pub-year">{publication.year}</p><p class="pub-status">Published</p></div>
+          <div>
+            <h2>{publication.title}</h2>
+            <p class="authors">{publication.authors}</p>
+            <p class="venue">{publication.venue}</p>
+            <p class="pub-note">{publication.description}</p>
+            <div class="publication-links">
+              <a class="text-link" href={publication.url}>{publication.linkLabel || 'View publication'} <Arrow diagonal /></a>
+              {project && <a class="quiet-link" href={local(`work/${project.slug}/`)}>{project.shortTitle} project <Arrow /></a>}
+            </div>
+          </div>
+        </article>
+      );
+    })}
+  </div>
   <p class="publication-name-note">Earlier publications appear under Abdelrahman Fawaz. Links open the article record or an available full-text PDF.</p>
   <details class="research-support"><summary>Research support for the EV maintenance study</summary><p>The published funding acknowledgment lists INNOVÉE / Solutions Serafin and the project identifiers PSO-2210 and ALLRP 580238-2022. <a href="https://www.emerald.com/jqme/article-abstract/doi/10.1108/JQME-06-2026-0131/1394107/A-reliability-enhancing-framework-for-remote?redirectedFrom=fulltext">Publisher record</a>.</p></details>
 </BaseLayout>
+
+<style>
+  .publication-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-top: 17px; }
+  .publication .publication-links a { font-size: 13px; margin-top: 0; }
+</style>

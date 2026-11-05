@@ -1,9 +1,50 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Arrow from '../../components/Arrow.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
 import { projects } from '../../data/projects';
+
+const groups = [
+  { id: 'communications', title: 'Communications & validation', summary: '5G core and cloud platforms, cellular performance, and vehicle communications.' },
+  { id: 'embedded', title: 'Embedded systems & RF', summary: 'Wearable sensors, Bluetooth localization, and antenna design and testing.' },
+  { id: 'industrial', title: 'Industrial systems & modeling', summary: 'Lab equipment integration, production-line simulation, and failure prediction.' },
+].map(group => ({ ...group, projects: projects.filter(project => project.discipline === group.id) }));
 ---
 <BaseLayout title="Projects — Abdelrahman Elsayed" description="Projects across electronics, embedded sensing, communication networks, industrial systems, and simulation. Explore the details and available code." active="work">
   <header class="page-heading projects-heading"><p class="eyebrow">Projects · {projects.length.toString().padStart(2, '0')}</p><h1>What I build<span class="name-period">.</span></h1><p class="lead">Electronics, software, and the systems that connect them. A closer look at my projects, from the hardware to the analysis.</p></header>
-  <div class="project-index-list">{projects.map(project => <ProjectPreview project={project} wide showRepository headingLevel="h2" />)}</div>
+  <nav class="project-jump-links" aria-label="Project categories">
+    {groups.map(group => <a class="quiet-link" href={`#${group.id}`}>{group.title}<span class="group-count" aria-hidden="true">{group.projects.length}</span><Arrow /></a>)}
+  </nav>
+  {groups.map(group => (
+    <section class="project-group" id={group.id} aria-labelledby={`${group.id}-heading`}>
+      <header class="project-group-heading">
+        <h2 id={`${group.id}-heading`}>{group.title}</h2>
+        <p>{group.summary}</p>
+      </header>
+      <div class="project-index-list">
+        {group.projects.map(project => <ProjectPreview project={project} wide showRepository />)}
+      </div>
+    </section>
+  ))}
 </BaseLayout>
+
+<style>
+  .project-jump-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .project-jump-links a {
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  .group-count { color: var(--sand); font-size: 0.8em; }
+  .project-group {
+    margin-top: clamp(54px, 8vw, 96px);
+    scroll-margin-top: 24px;
+  }
+  .project-group-heading h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.12; }
+  .project-group-heading p { color: var(--muted); margin: 10px 0 24px; }
+</style>

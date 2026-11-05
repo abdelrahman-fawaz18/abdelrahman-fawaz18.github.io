@@ -12,7 +12,7 @@ const sectionIds = ['professional', 'teaching', 'education', 'recognition', 'ski
 ---
 <BaseLayout title="Resume — Abdelrahman Elsayed" description="Experience, teaching, education, skills, projects, publications, recognition, and leadership in electronics and communications." active="resume">
   <header class="page-heading resume-heading"><p class="eyebrow">Professional profile</p><h1>Experience &amp;<br />background.</h1><p class="lead">Electronics &amp; communications · Embedded systems · Networks</p></header>
-  <div class="resume-actions"><button type="button" class="button" id="print-resume">Print / save as PDF <Arrow /></button><a class="button button-secondary" href={`mailto:${email}?subject=Resume%20request`}>Request my resume <Arrow /></a></div>
+  <div class="resume-actions"><a class="button" href={local('Abdelrahman-Elsayed-Resume.pdf')} download>Download resume (PDF) <Arrow /></a><button type="button" class="button button-secondary" id="print-resume">Print full profile <Arrow /></button></div>
   <div class="resume-layout">
     <aside class="cv-sidebar"><nav aria-label="Resume sections"><p class="eyebrow">On this page</p>{sections.map((section, index) => <a href={`#${sectionIds[index]}`}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{section}</a>)}</nav><a class="cv-about-link" href={local('about/')}>A little about me <Arrow /></a></aside>
     <article class="resume-sheet resume-redesign" aria-label="Printable professional profile">
