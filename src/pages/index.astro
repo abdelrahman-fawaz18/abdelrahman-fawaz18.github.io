@@ -13,20 +13,25 @@ import { local } from '../lib/urls';
     <div class:list={['hero-name-row', { 'has-portrait': portrait }]}><h1 id="name">Abdelrahman<br />Elsayed</h1></div>
     <div class="hero-intro">
       <h2>Connecting hardware,<br class="desktop-break" /> software, and systems.</h2>
-      <div class="hero-detail"><p>I build prototypes, solve integration problems, and test how systems behave.</p><p class="location-note"><svg width="14" height="16" viewBox="0 0 18 22" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M16 8c0 5-7 12-7 12S2 13 2 8a7 7 0 1 1 14 0Z"/><circle cx="9" cy="8" r="2.2"/></svg>Based in Montreal</p><div class="hero-actions"><a class="button" href={local('work/')}>Explore my projects <Arrow /></a></div><SocialLinks label="My profiles and email" /></div>
+      <div class="hero-detail">
+        <p>I’m an electronics and communications engineer. I build embedded prototypes and test how devices and networks work together.</p>
+        <p class="location-note"><svg width="14" height="16" viewBox="0 0 18 22" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M16 8c0 5-7 12-7 12S2 13 2 8a7 7 0 1 1 14 0Z"/><circle cx="9" cy="8" r="2.2"/></svg>Based in Montreal</p>
+        <div class="hero-actions"><a class="button" href={local('work/')}>Explore my projects <Arrow /></a></div>
+        <SocialLinks label="My profiles and email" />
+      </div>
     </div>
-  </section>
-  <section class="experience section-block" aria-labelledby="experience-heading">
-    <div class="section-heading"><h2 id="experience-heading">Selected experience</h2><a class="quiet-link" href={local('about/')}>More about me <Arrow /></a></div>
-    <div class="role-list">{roles.map(role => <article class="role"><h3>{role.organization}</h3><p class="role-title">{role.title}</p><p class="role-dates">{role.dates}</p><p class="role-summary">{role.summary}</p></article>)}</div>
   </section>
   <section class="work section-block" id="work" aria-labelledby="work-heading">
     <div class="section-heading"><h2 id="work-heading">Selected projects</h2></div>
     <div class="project-grid">{featuredProjects.map((project, index) => <ProjectPreview project={project} wide={index === 2} />)}</div>
     <div class="all-projects-action"><a class="text-link" href={local('work/')}>Explore all projects <Arrow /></a></div>
   </section>
+  <section class="experience section-block" aria-labelledby="experience-heading">
+    <div class="section-heading"><h2 id="experience-heading">Selected experience</h2><a class="quiet-link" href={local('resume/#professional')}>View experience <Arrow /></a></div>
+    <div class="role-list">{roles.map(role => <article class="role"><h3>{role.organization}</h3><p class="role-title">{role.title}</p><p class="role-dates">{role.dates}</p><p class="role-summary">{role.summary}</p></article>)}</div>
+  </section>
   <section class="context-strip" aria-labelledby="context-heading">
-    <p class="eyebrow">A little context</p><div><h2 id="context-heading">From the circuit<br />to the connected system.</h2><p>My background is in Electronics and Communications Engineering, with a master’s degree in Industrial Engineering from Polytechnique Montréal. I work across embedded sensing, networks, integration, and simulation—and enjoy understanding how the pieces fit together.</p><a class="text-link" href={local('about/')}>About my background <Arrow /></a></div>
+    <p class="eyebrow">A little context</p><div><h2 id="context-heading">From the circuit<br />to the connected system.</h2><p>I studied electronics and communications at E-JUST, then earned a master’s in Industrial Engineering at Polytechnique Montréal, where I researched communication reliability for EV maintenance.</p><a class="text-link" href={local('about/')}>About my background <Arrow /></a></div>
   </section>
   <section class="publication-teaser" aria-labelledby="publication-heading">
     <div><p class="eyebrow">Selected publication · 2026</p><h2 id="publication-heading">Giving urgent EV telemetry<br />the right network treatment.</h2><p>A simulation-based study of QoS-aware 5G communication for remote electric vehicle maintenance.</p><a class="text-link" href="https://doi.org/10.1108/JQME-06-2026-0131">Read the journal article <Arrow diagonal /></a></div>

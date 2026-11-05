@@ -73,7 +73,7 @@ const profileOrder = [...highlightOrder, 'nr-scheduler-validation', 'cv2x-montre
 export const profileProjects = projects.filter(project => profileOrder.includes(project.slug)).sort((a, b) => profileOrder.indexOf(a.slug) - profileOrder.indexOf(b.slug));
 
 export const roles = [
-  { organization: 'Solutions Serafin', title: 'Wireless Systems Specialist — EV Connectivity', dates: 'Jan 2024 – Oct 2026', summary: 'EV telemetry connectivity and 5G QoS simulation.' },
-  { organization: 'ICPS Lab · Polytechnique Montréal', title: 'Graduate Researcher', dates: '2024 – Oct 2026', summary: 'Wireless research, simulation, and system integration.' },
-  { organization: 'Egyptian Space Agency', title: 'Electronics and Communications Engineering Intern', dates: 'Jun – Oct 2021', summary: 'Linux-based satellite-swarm prototype.' },
+  { organization: 'Solutions Serafin', title: 'Wireless Systems Specialist — EV Connectivity', dates: 'Jan 2024 – Oct 2026', summary: 'Connected an EV motor testbed to the lab over MQTT for maintenance telemetry and analysis.' },
+  { organization: 'ICPS Lab · Polytechnique Montréal', title: 'Graduate Researcher', dates: '2024 – Oct 2026', summary: 'Validated PLC interfaces and investigated connectivity faults across industrial lab equipment.' },
+  { organization: 'Egyptian Space Agency', title: 'Electronics and Communications Engineering Intern', dates: 'Jun – Oct 2021', summary: 'Built a Raspberry Pi prototype to model onboard computing and telemetry for satellite swarms.' },
 ];
