@@ -29,10 +29,14 @@ async function resolveTarget(value, file) {
 for (const file of pages) {
   const html = await fs.readFile(file, 'utf8');
   const relative = path.relative(root, file);
+  const runtimeShell = ['demos/drivetwin/index.html', 'demos/drivetwin/demo.html'].includes(relative.split(path.sep).join('/'));
   const title = html.match(/<title>(.*?)<\/title>/s)?.[1];
-  if (!title || titles.has(title)) errors.push(`${relative}: missing or duplicate title`);
+  if (!title || (!runtimeShell && titles.has(title))) errors.push(`${relative}: missing or duplicate title`);
   titles.add(title);
-  if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) errors.push(`${relative}: expected one h1`);
+  if (runtimeShell) {
+    // The qualified recorded demo renders its headings in React after loading.
+    if (!html.includes('id="root"') || !html.includes('type="module"') || !html.includes('name="robots" content="noindex, nofollow, noarchive"')) errors.push(`${relative}: invalid or indexable demo shell`);
+  } else if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) errors.push(`${relative}: expected one h1`);
   if (!html.includes('lang="en"') || !html.includes('name="description"')) errors.push(`${relative}: missing language/description`);
   if (/C:\\|Job Search|Resume_AE_Master|candidate\/preferences|TODO|lorem ipsum/i.test(html)) errors.push(`${relative}: private path or placeholder content`);
   for (const tag of html.matchAll(/<img\b[^>]*>/g)) {
