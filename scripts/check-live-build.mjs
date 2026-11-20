@@ -6,7 +6,7 @@ const origin = 'https://abdelrahman-elsayed.com';
 const sitemap = await fs.readFile(path.join(root, 'sitemap.xml'), 'utf8');
 const robots = await fs.readFile(path.join(root, 'robots.txt'), 'utf8');
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => new URL(match[1]));
-if (urls.length !== 17) throw new Error(`Expected 17 sitemap URLs; found ${urls.length}.`);
+if (urls.length !== 18) throw new Error(`Expected 18 sitemap URLs; found ${urls.length}.`);
 if (!robots.includes('Allow: /') || robots.includes('Disallow: /') || !robots.includes(`${origin}/sitemap.xml`)) {
   throw new Error('The public robots.txt must allow indexing and reference the live sitemap.');
 }

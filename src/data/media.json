@@ -86,5 +86,33 @@
   "wearable-prototype.webp": {
     "width": 1280,
     "height": 720
+  },
+  "drivetwin-dashboard.png": {
+    "width": 1600,
+    "height": 1080
+  },
+  "drivetwin-recommendation.png": {
+    "width": 1600,
+    "height": 900
+  },
+  "drivetwin-approved.png": {
+    "width": 1600,
+    "height": 900
+  },
+  "drivetwin-measured.png": {
+    "width": 1600,
+    "height": 900
+  },
+  "drivetwin-charging-result.svg": {
+    "width": 1152.0,
+    "height": 417.6
+  },
+  "drivetwin-system-loop.svg": {
+    "width": 880.0,
+    "height": 292.0
+  },
+  "drivetwin-forecast-errors.svg": {
+    "width": 892.8,
+    "height": 554.4
   }
 }

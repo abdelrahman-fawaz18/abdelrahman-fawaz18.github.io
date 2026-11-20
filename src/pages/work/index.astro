@@ -7,7 +7,7 @@ import { projects } from '../../data/projects';
 const groups = [
   { id: 'communications', title: 'Communications & validation', summary: '5G core and cloud platforms, cellular performance, and vehicle communications.' },
   { id: 'embedded', title: 'Embedded systems & RF', summary: 'Wearable sensors, Bluetooth localization, and antenna design and testing.' },
-  { id: 'industrial', title: 'Industrial systems & modeling', summary: 'Lab equipment integration, production-line simulation, and failure prediction.' },
+  { id: 'industrial', title: 'Industrial systems & modeling', summary: 'Vehicle digital twins, lab equipment integration, production-line simulation, and failure prediction.' },
 ].map(group => ({ ...group, projects: projects.filter(project => project.discipline === group.id) }));
 ---
 <BaseLayout title="Projects — Abdelrahman Elsayed" description="Projects across electronics, embedded sensing, communication networks, industrial systems, and simulation. Explore the details and available code." active="work">

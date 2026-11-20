@@ -1,0 +1,210 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import CaseFigure from '../../components/CaseFigure.astro';
+import Arrow from '../../components/Arrow.astro';
+import { local } from '../../lib/urls';
+
+const repository = 'https://github.com/abdelrahman-fawaz18/DriveTwin';
+const source = `${repository}/blob/a01abccca5f10b9da15c026e07319ccc461c23d1`;
+const frontmatter = {
+  slug: 'drivetwin',
+  title: 'DriveTwin',
+  summary: 'An electric vehicle digital twin connecting telemetry, route energy forecasting, and operator-approved charging, with a recorded browser demo.',
+  category: 'Electric vehicle digital twin',
+  year: '2026',
+  role: 'System design, vehicle integration, backend services, forecasting, and dashboard',
+  environment: 'One simulated electric bus · SUMO · OpenStreetMap roads and elevation',
+  tools: 'Python, FastAPI, React, TypeScript, PostgreSQL, SQLite, MQTT, SUMO, and Docker',
+  repository,
+  report: local('demos/drivetwin/'),
+  reportLabel: 'Try the recorded demo',
+  findingLabel: 'What I built',
+  finding: 'A digital twin that follows a simulated electric bus from live telemetry and energy forecasts to an approved charging stop, measured energy delivery, and resumed driving.',
+  contribution: 'I designed and built the vehicle adapter, reliable telemetry pipeline, forecasting and command services, and React dashboard around a SUMO vehicle simulation.',
+  leadFigure: {
+    file: 'drivetwin-dashboard.png',
+    alt: 'Recorded DriveTwin dashboard with a Montréal route map, battery charge, speed, motor temperature, energy forecast, and charge history.',
+    caption: 'Dashboard overview from the recorded Montréal demo, paused after approval of a charging stop.',
+    source: `${source}/docs/media/dashboard/README.md`,
+  },
+  evidence: [
+    { label: 'README, features, and local setup', url: repository },
+    { label: 'Architecture and component ownership', url: `${repository}/blob/main/docs/architecture.md` },
+    { label: 'Engineering traces through delivery, forecasting, and charging', url: `${repository}/blob/main/docs/engineering/engineering-walkthrough.md` },
+    { label: 'Simulation release verification', url: `${repository}/blob/main/docs/release/verification.md` },
+    { label: 'Recorded demo verification', url: `${repository}/blob/main/docs/verification/browser-demo.md` },
+  ],
+};
+const chargingSteps = [
+  {
+    file: 'drivetwin-recommendation.png',
+    title: 'Review the forecast',
+    alt: 'Charging recommendation with a predicted reserve breach and a proposed 12 percent departure charge.',
+    caption: 'The advisor compares charging options and proposes a stop and departure target.',
+    source: `${source}/docs/media/charging-story/README.md`,
+  },
+  {
+    file: 'drivetwin-approved.png',
+    title: 'Approve the stop',
+    alt: 'Dashboard acknowledgment showing the recorded charging stop approval.',
+    caption: 'The operator approves a specific stop. The command service checks its authority and timing.',
+    source: `${source}/docs/media/charging-story/README.md`,
+  },
+  {
+    file: 'drivetwin-measured.png',
+    title: 'Verify the effect',
+    alt: 'Dashboard showing delivered charging energy and the bus moving again.',
+    caption: 'Later observations confirm energy transfer and the return to driving.',
+    source: `${source}/docs/media/charging-story/README.md`,
+  },
+] as const;
+---
+<CaseStudyLayout frontmatter={frontmatter}>
+  <h2>From vehicle readings to an operating decision</h2>
+  <p>
+    Monitoring a battery becomes more useful when it helps answer what happens next.
+    DriveTwin tracks a simulated electric bus, estimates how much energy its remaining
+    route needs, and recommends a charging stop when the forecast falls below reserve.
+    An operator can approve that stop and follow the decision through to observed
+    charging and resumed motion.
+  </p>
+  <p>
+    The system uses real OpenStreetMap roads and elevation inputs, with vehicle behavior
+    and battery readings supplied by SUMO. The dashboard brings together twenty signals,
+    a route map, forecast history, charging decisions, and saved-trip replay.
+  </p>
+  <div class="demo-invitation">
+    <div>
+      <h3>Make the charging decision</h3>
+      <p>The recorded demo pauses after thirty seconds. Approve the stop or keep driving, then follow the recorded outcome.</p>
+    </div>
+    <a class="button" href={local('demos/drivetwin/')}>Try the demo <Arrow /></a>
+  </div>
+
+  <h2>A charging decision, from forecast to result</h2>
+  <p>
+    On the Gare Centrale–Parc La Fontaine route in Montréal, the bus starts at{' '}
+    <strong>11.6% charge</strong>. Its predicted minimum without charging is{' '}
+    <strong>9.33%</strong>, below the <strong>10% reserve</strong>. The advisor
+    recommends a charging bay and a <strong>12% departure target</strong>.
+  </p>
+  <div class="charging-sequence">
+    {chargingSteps.map(step => (
+      <section>
+        <h3>{step.title}</h3>
+        <CaseFigure figure={step} />
+      </section>
+    ))}
+  </div>
+  <p>
+    The approved stop delivered <strong>4.192 kWh</strong>. The bus finished the
+    simulated trip in <strong>11 minutes 36 seconds</strong> and stayed above reserve,
+    with a measured minimum charge of <strong>10.72%</strong>.
+  </p>
+  <CaseFigure figure={{
+    file: 'drivetwin-charging-result.svg',
+    alt: 'Recorded battery charge over the trip, showing the charging interval and the predicted and measured minimum charge.',
+    caption: 'Recorded charge history for the Montréal charging example. Forecast values and observed readings are labeled separately. This earlier run is distinct from the dashboard overview capture.',
+    source: `${source}/docs/media/charging-story/README.md`,
+  }} />
+  <p class="source-note">
+    <a href={`${source}/docs/verification/moving-bus-charging.md#connected-montréal-case`}>Read the connected Montréal verification</a>
+  </p>
+
+  <h2>How the system works</h2>
+  <CaseFigure figure={{
+    file: 'drivetwin-system-loop.svg',
+    alt: 'DriveTwin system loop from a simulated bus through observations, forecasts, guarded action, and verified effects.',
+    caption: 'The vehicle supplies observations, the twin estimates what comes next, and later telemetry verifies the effect of an approved action.',
+    source: `${source}/docs/engineering/figures/twin-at-a-glance.svg`,
+  }} />
+  <p>
+    A Python adapter reads SUMO through TraCI and saves observations to a SQLite queue.
+    MQTT carries those observations to ingestion, which validates and commits them to
+    PostgreSQL. FastAPI serves current readings, history, and forecasts to the React
+    dashboard. A separate command path handles operator approval and vehicle actions.
+    Docker packages the local services.
+  </p>
+  <h3>Keep readings until storage confirms them</h3>
+  <p>
+    The vehicle retains each original packet until ingestion confirms a committed
+    database write. Retries preserve its identity, so a lost receipt can be recovered
+    without storing a second accepted observation. In the documented one-bus outage
+    check, all <strong>480 original messages and 9,600 readings</strong> reconciled
+    after a five-minute delivery interruption.
+  </p>
+  <h3>Make the forecast depend on the route</h3>
+  <p>
+    The physics-based predictor accounts for elevation, stops, acceleration, rolling
+    resistance, aerodynamic drag, and equipment demand. Each saved forecast identifies
+    the observation, route, vehicle configuration, and assumptions used to calculate it.
+    The numerical worker runs with restricted resources and returns an estimate to a
+    service that validates and stores the result.
+  </p>
+  <h3>Check approval before issuing a command</h3>
+  <p>
+    The command service checks the approved stop, current vehicle data, offer expiry,
+    and station conditions before committing the handoff. A durable reservation
+    prevents the same request from being claimed again after an interruption.
+    The journal records command acknowledgment and later observed energy transfer
+    and motion as separate events.
+  </p>
+
+  <h2>Verification and operating scope</h2>
+  <p>
+    The geographic regression study compared seventy forecasts across ten journeys
+    in Montréal, Ottawa, and the Vancouver region against SUMO battery readings.
+    The largest arrival-charge error was <strong>0.471 percentage points</strong>.
+    The same equations and coefficients served every route, and all seventy
+    forecasts passed the study’s declared checks.
+  </p>
+  <CaseFigure figure={{
+    file: 'drivetwin-forecast-errors.svg',
+    alt: 'Maximum arrival-charge forecast error for ten geographic journeys, with the largest at 0.471 percentage points.',
+    caption: 'Geographic regression results against SUMO battery readings, using the same model across ten journeys.',
+    source: `${source}/docs/verification/energy-geographic.md`,
+  }} />
+  <p>
+    The release supports one simulated bus in reviewed local configurations. The
+    browser demo replays matched recorded outcomes, while the local stack runs
+    the vehicle, telemetry, forecasting, and command services. Physical-bus
+    validation, fleet endurance, and production deployment remain future work.
+    Several older verification results retain their compact summaries after the
+    original recordings were retired.
+  </p>
+  <p>
+    The public repository includes the implementation, engineering checks, setup
+    guides, and verification records. Geographic launcher trips use a separately
+    installed scenario bundle. Original code and documentation use the MIT license.
+    Maps retain <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributor credit and ODbL terms</a>,
+    with elevation and software notices documented in the{' '}
+    <a href={`${source}/docs/rights/README.md`}>source inventory</a> and{' '}
+    <a href={local('licenses/drivetwin.txt')}>media notice</a>.
+  </p>
+</CaseStudyLayout>
+
+<style>
+  .demo-invitation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #24271f;
+  }
+  .demo-invitation h3 { margin: 0 0 8px; }
+  .demo-invitation p { font-size: 15px; line-height: 1.6; }
+  .demo-invitation .button { flex-shrink: 0; font-size: 14px; }
+  .charging-sequence { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; margin-top: 28px; }
+  .charging-sequence h3 { font-size: 17px; margin: 0 0 10px; }
+  .charging-sequence :global(.case-figure) { padding: 8px; margin: 0; }
+  .charging-sequence :global(figcaption) { font-size: 12px; }
+  .source-note { font-size: 13px; }
+  @media(max-width:700px) {
+    .demo-invitation { align-items: flex-start; flex-direction: column; }
+    .charging-sequence { grid-template-columns: minmax(0,1fr); gap: 26px; }
+  }
+</style>

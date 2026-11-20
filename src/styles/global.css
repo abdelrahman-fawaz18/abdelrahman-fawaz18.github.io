@@ -309,8 +309,28 @@ nav a[aria-current=page] {
 }
 .project-grid {
   display:grid;
-  grid-template-columns:1.42fr 1fr;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-auto-rows:1fr;
   gap:32px 25px
+}
+.project-grid .project-preview {
+  display:flex;
+  flex-direction:column;
+  min-width:0
+}
+.project-grid .project-art {
+  height:auto;
+  aspect-ratio:16/10
+}
+.project-grid .project-caption {
+  flex:1;
+  justify-content:space-between
+}
+.project-art.project-screenshot {
+  background:#f3f5f8
+}
+.project-art.project-screenshot img {
+  object-fit:contain
 }
 .project-wide {
   grid-column:1/-1
@@ -1925,6 +1945,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-even
 
 /* Smaller covers keep the complete project collection easy to scan. */
 .project-index-list .project-art { aspect-ratio: 10; }
+.project-index-list .project-screenshot img { object-fit: cover; object-position: center 30%; }
 @media(max-width:700px) { .project-index-list .project-art { aspect-ratio: 3.2; } }
 
 /* One quiet viewer for paintings, photographs, and project figures. */

@@ -24,6 +24,18 @@ export const projects = [
     cover: 'core', featured: true, repository: 'https://github.com/abdelrahman-fawaz18/iot-smart-wearable-health-monitor',
   },
   {
+    slug: 'drivetwin', number: '12', title: 'DriveTwin', shortTitle: 'DriveTwin',
+    discipline: 'industrial', category: 'EV digital twin', tools: 'Python · React · SUMO · MQTT',
+    description: 'Connecting vehicle telemetry, route energy forecasts, and operator-approved charging in a simulated electric bus.',
+    cover: 'drivetwin',
+    coverImage: {
+      src: 'images/evidence/drivetwin-dashboard.png',
+      alt: 'DriveTwin dashboard showing the simulated bus route, battery readings, energy forecast, and signal history.',
+      width: 1600, height: 1080,
+    },
+    featured: true, repository: 'https://github.com/abdelrahman-fawaz18/DriveTwin',
+  },
+  {
     slug: 'nr-scheduler-validation', number: '05', title: '5G NR scheduler validation', shortTitle: '5G NR scheduler validation',
     discipline: 'communications', category: 'Research simulation', tools: 'Python · 3GPP-informed models · QoS',
     description: 'Comparing scheduling policies through controlled, reproducible downlink experiments.',
@@ -67,9 +79,9 @@ export const projects = [
   },
 ];
 
-const highlightOrder = ['ev-connectivity-qos', 'cloud-native-5g', 'wearable-health-monitoring'];
+const highlightOrder = ['ev-connectivity-qos', 'cloud-native-5g', 'wearable-health-monitoring', 'drivetwin'];
 export const featuredProjects = projects.filter(project => project.featured).sort((a, b) => highlightOrder.indexOf(a.slug) - highlightOrder.indexOf(b.slug));
-const profileOrder = [...highlightOrder, 'nr-scheduler-validation', 'cv2x-montreal'];
+const profileOrder = ['ev-connectivity-qos', 'cloud-native-5g', 'wearable-health-monitoring', 'nr-scheduler-validation', 'cv2x-montreal'];
 export const profileProjects = projects.filter(project => profileOrder.includes(project.slug)).sort((a, b) => profileOrder.indexOf(a.slug) - profileOrder.indexOf(b.slug));
 
 export const roles = [
