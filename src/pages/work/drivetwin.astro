@@ -119,12 +119,14 @@ const tools = [
   </p>
 
   <h2>System architecture</h2>
+  <div class="architecture-figure">
   <CaseFigure figure={{
-    file: 'drivetwin-architecture.svg',
+    file: 'drivetwin-architecture.png',
     alt: 'System architecture connecting SUMO and a SQLite outbox to PostgreSQL over MQTT, with energy forecasting, charging advice, a React dashboard, and an operator-approved command path back to the vehicle.',
-    caption: 'The system architecture from the repository README, with the same components, connections, and colors.',
+    caption: 'DriveTwin system architecture.',
     source: `${source}/README.md#system-architecture`,
   }} />
+  </div>
   <p>
     A Python adapter reads SUMO through TraCI and saves observations to a SQLite queue.
     MQTT carries those observations to ingestion, which validates and commits them to
@@ -217,6 +219,7 @@ const tools = [
   .charging-sequence :global(.case-figure) { padding: 8px; margin: 0; }
   .charging-sequence :global(figcaption) { font-size: 12px; }
   .source-note { font-size: 13px; }
+  .architecture-figure { max-width: 666px; margin: 22px auto 0; }
   .tool-list { margin: 0; }
   .tool-list > div {
     display: grid;
