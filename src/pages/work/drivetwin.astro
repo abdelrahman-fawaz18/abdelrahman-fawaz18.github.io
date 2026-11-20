@@ -58,6 +58,13 @@ const chargingSteps = [
     source: `${source}/docs/media/charging-story/README.md`,
   },
 ] as const;
+const tools = [
+  { area: 'Backend and forecasting', names: 'Python, FastAPI' },
+  { area: 'Dashboard and maps', names: 'React, TypeScript, Leaflet' },
+  { area: 'Storage and messaging', names: 'PostgreSQL, SQLite, MQTT, Mosquitto' },
+  { area: 'Vehicle integration', names: 'SUMO, TraCI' },
+  { area: 'Packaging and testing', names: 'Docker, pytest, Playwright' },
+];
 ---
 <CaseStudyLayout frontmatter={frontmatter}>
   <h2>From vehicle readings to an operating decision</h2>
@@ -111,12 +118,12 @@ const chargingSteps = [
     <a href={`${source}/docs/verification/moving-bus-charging.md#connected-montréal-case`}>Read the connected Montréal verification</a>
   </p>
 
-  <h2>How the system works</h2>
+  <h2>System architecture</h2>
   <CaseFigure figure={{
-    file: 'drivetwin-system-loop.svg',
-    alt: 'DriveTwin system loop from a simulated bus through observations, forecasts, guarded action, and verified effects.',
-    caption: 'The vehicle supplies observations, the twin estimates what comes next, and later telemetry verifies the effect of an approved action.',
-    source: `${source}/docs/engineering/figures/twin-at-a-glance.svg`,
+    file: 'drivetwin-architecture.svg',
+    alt: 'System architecture connecting SUMO and a SQLite outbox to PostgreSQL over MQTT, with energy forecasting, charging advice, a React dashboard, and an operator-approved command path back to the vehicle.',
+    caption: 'The system architecture from the repository README, with the same components, connections, and colors.',
+    source: `${source}/README.md#system-architecture`,
   }} />
   <p>
     A Python adapter reads SUMO through TraCI and saves observations to a SQLite queue.
@@ -181,6 +188,13 @@ const chargingSteps = [
     <a href={`${source}/docs/rights/README.md`}>source inventory</a> and{' '}
     <a href={local('licenses/drivetwin.txt')}>media notice</a>.
   </p>
+  <section slot="after-evidence" aria-labelledby="tools-heading">
+    <h2 id="tools-heading">Tools used</h2>
+    <dl class="tool-list">
+      {tools.map(tool => <div><dt>{tool.area}</dt><dd>{tool.names}</dd></div>)}
+    </dl>
+    <p class="source-note"><a href={`${source}/docs/engineering/toolkit.md`}>Full toolchain and dependencies <Arrow diagonal /></a></p>
+  </section>
 </CaseStudyLayout>
 
 <style>
@@ -203,8 +217,19 @@ const chargingSteps = [
   .charging-sequence :global(.case-figure) { padding: 8px; margin: 0; }
   .charging-sequence :global(figcaption) { font-size: 12px; }
   .source-note { font-size: 13px; }
+  .tool-list { margin: 0; }
+  .tool-list > div {
+    display: grid;
+    grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr);
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool-list dt { color: var(--sand); font-size: 14px; }
+  .tool-list dd { color: var(--bone); font-size: 15px; margin: 0; }
   @media(max-width:700px) {
     .demo-invitation { align-items: flex-start; flex-direction: column; }
     .charging-sequence { grid-template-columns: minmax(0,1fr); gap: 26px; }
+    .tool-list > div { grid-template-columns: minmax(0,1fr); gap: 7px; }
   }
 </style>

@@ -79,7 +79,7 @@ export const projects = [
   },
 ];
 
-const highlightOrder = ['ev-connectivity-qos', 'cloud-native-5g', 'wearable-health-monitoring', 'drivetwin'];
+const highlightOrder = ['drivetwin', 'cloud-native-5g', 'ev-connectivity-qos', 'wearable-health-monitoring'];
 export const featuredProjects = projects.filter(project => project.featured).sort((a, b) => highlightOrder.indexOf(a.slug) - highlightOrder.indexOf(b.slug));
 const profileOrder = ['ev-connectivity-qos', 'cloud-native-5g', 'wearable-health-monitoring', 'nr-scheduler-validation', 'cv2x-montreal'];
 export const profileProjects = projects.filter(project => profileOrder.includes(project.slug)).sort((a, b) => profileOrder.indexOf(a.slug) - profileOrder.indexOf(b.slug));
