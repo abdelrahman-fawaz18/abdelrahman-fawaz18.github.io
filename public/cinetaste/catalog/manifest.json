@@ -1,0 +1,34 @@
+{
+  "schema": "cinetaste-static-catalog-v1",
+  "version": "2026-11-25.1",
+  "asset": "cinetaste-2026-11-25.1.json.gz",
+  "checksumFile": "cinetaste-2026-11-25.1.json.gz.sha256",
+  "compressedBytes": 3117766,
+  "decodedBytes": 7700574,
+  "counts": {
+    "films": 100832,
+    "omdbFilms": 91755,
+    "wikidataFallbackFilms": 9077,
+    "omdbFilmsWithWikidataGenres": 9869,
+    "omdbFilmsWithWikidataAliases": 126,
+    "filmsWithRuntime": 84782
+  },
+  "sources": [
+    {
+      "name": "omdb.org",
+      "attribution": "omdb.org contributors",
+      "source": "https://www.omdb.org/en/us/content/Help:DataDownload",
+      "license": "CC BY 2.0 Germany",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/de/",
+      "changes": "Selected fields, normalized titles, and mapped genres."
+    },
+    {
+      "name": "Wikidata",
+      "attribution": "Wikidata contributors",
+      "source": "https://www.wikidata.org/wiki/Wikidata:Database_download",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Selected structured facts, normalized titles, and mapped genres."
+    }
+  ]
+}

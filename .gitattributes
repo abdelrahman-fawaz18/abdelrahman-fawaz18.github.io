@@ -1,0 +1,3 @@
+# Preserve the bytes of the CineTaste static release across checkouts.
+public/cinetaste/** -text
+public/cinetaste/_next/** -diff

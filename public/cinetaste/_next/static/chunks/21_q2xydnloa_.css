@@ -1,0 +1,1 @@
+:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light dark;background:var(--lightningcss-light,#ede0d3)var(--lightningcss-dark,#171d19)}@media (prefers-color-scheme:dark){:root{--lightningcss-light: ;--lightningcss-dark:initial}}*,:before,:after{box-sizing:border-box}body{margin:0}
