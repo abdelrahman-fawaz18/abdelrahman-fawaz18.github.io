@@ -2,6 +2,7 @@ import { loadCatalog } from "./catalog.ts";
 import { loadCredits } from "./credits.ts";
 import type { CreditMatch, CreditsIndex } from "./credits.ts";
 import { creditQuery } from "../chat/people-query.ts";
+import { withoutDiscoveryClauses } from "../chat/intent.ts";
 import { releasedFilters } from "../chat/shortlist.ts";
 import type { ChatSearch, ChatShortlist } from "../chat/shortlist.ts";
 import { parseExport } from "./letterboxd.ts";
@@ -26,7 +27,9 @@ async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
   if (!session) return empty;
   const clear = releasedFilters(search.prompt);
   const prior = clear.credit ? undefined : search.previousFilters?.credit;
-  const query = creditQuery(clear.text);
+  const query = creditQuery(
+    search.scope === "outside" ? withoutDiscoveryClauses(clear.text) : clear.text,
+  );
   const candidate = query
     ? ({
         name: query.name,
