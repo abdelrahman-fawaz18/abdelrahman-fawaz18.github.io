@@ -2,6 +2,7 @@ import { loadCatalog } from "./catalog.ts";
 import { loadCredits } from "./credits.ts";
 import type { CreditMatch, CreditsIndex } from "./credits.ts";
 import { creditQuery } from "../chat/people-query.ts";
+import { releasedFilters } from "../chat/shortlist.ts";
 import type { ChatSearch, ChatShortlist } from "../chat/shortlist.ts";
 import { parseExport } from "./letterboxd.ts";
 import type { Reply, Request } from "./protocol.ts";
@@ -23,10 +24,14 @@ let started = false;
 async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
   const empty = { eligibleCount: 0, candidates: [] };
   if (!session) return empty;
-  const prior = search.previousFilters?.credit;
-  const query = creditQuery(search.prompt);
+  const clear = releasedFilters(search.prompt);
+  const prior = clear.credit ? undefined : search.previousFilters?.credit;
+  const query = creditQuery(clear.text);
   const candidate = query
-    ? ({ name: query.name, role: query.role ?? prior?.role ?? "cast" } as const)
+    ? ({
+        name: query.name,
+        role: query.role ?? search.creditRole ?? prior?.role ?? "cast",
+      } as const)
     : prior;
   if (!candidate) return session.prepareChat(search);
   let match: CreditMatch;
@@ -40,7 +45,7 @@ async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
     match = { status: "unavailable", filter: candidate };
   }
   if (match.status === "matched") return session.prepareChat(search, match.credit);
-  if (match.status === "missing" && query && !query.required && !prior) {
+  if (match.status === "missing" && query && !query.required && !prior && !search.creditRole) {
     return session.prepareChat(search);
   }
   return {
