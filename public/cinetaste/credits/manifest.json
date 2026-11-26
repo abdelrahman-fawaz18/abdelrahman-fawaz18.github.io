@@ -1,0 +1,15 @@
+{
+  "schema": "cinetaste-credits-v1",
+  "asset": "credits-2026-11-26.1.json.gz",
+  "catalogVersion": "2026-11-25.1",
+  "compressedBytes": 4865260,
+  "decodedBytes": 13331760,
+  "checksumFile": "credits-2026-11-26.1.json.gz.sha256",
+  "names": 209733,
+  "inputChecksumFile": "credits-inputs.sha256",
+  "source": "https://www.omdb.org/en/us/content/Help:DataDownload",
+  "attribution": "omdb.org contributors",
+  "license": "CC BY 2.0 Germany",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/de/",
+  "changes": "Selected acting and directing credits, linked film IDs, and normalized names."
+}

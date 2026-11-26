@@ -1,4 +1,8 @@
 import { loadCatalog } from "./catalog.ts";
+import { loadCredits } from "./credits.ts";
+import type { CreditMatch, CreditsIndex } from "./credits.ts";
+import { creditQuery } from "../chat/people-query.ts";
+import type { ChatSearch, ChatShortlist } from "../chat/shortlist.ts";
 import { parseExport } from "./letterboxd.ts";
 import type { Reply, Request } from "./protocol.ts";
 import { DEFAULT_FILTERS } from "./ranking.ts";
@@ -12,13 +16,52 @@ const worker = globalThis as unknown as {
   onmessage: ((event: MessageEvent<Request>) => void) | null;
 };
 let session: ReturnType<typeof createSession> | null = null;
+let creditCatalog: { url: URL; version: string } | undefined;
+let credits: Promise<CreditsIndex> | undefined;
 let started = false;
+
+async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
+  const empty = { eligibleCount: 0, candidates: [] };
+  if (!session) return empty;
+  const prior = search.previousFilters?.credit;
+  const query = creditQuery(search.prompt);
+  const candidate = query
+    ? ({ name: query.name, role: query.role ?? prior?.role ?? "cast" } as const)
+    : prior;
+  if (!candidate) return session.prepareChat(search);
+  let match: CreditMatch;
+  try {
+    if (!creditCatalog) throw new Error("Credits unavailable");
+    credits ??= loadCredits(creditCatalog.url, creditCatalog.version);
+    const index = await credits;
+    match = index.match(candidate);
+  } catch {
+    credits = undefined;
+    match = { status: "unavailable", filter: candidate };
+  }
+  if (match.status === "matched") return session.prepareChat(search, match.credit);
+  if (match.status === "missing" && query && !query.required && !prior) {
+    return session.prepareChat(search);
+  }
+  return {
+    ...empty,
+    creditIssue: match,
+    appliedFilters: {
+      minRuntime: null,
+      maxRuntime: null,
+      minYear: null,
+      maxYear: null,
+      included: [],
+      excluded: [],
+      ...search.previousFilters,
+      credit: candidate,
+    },
+  };
+}
 
 worker.onmessage = async ({ data }) => {
   if (data.type === "chat-shortlist") {
-    const results = session
-      ? session.prepareChat(data.search)
-      : { eligibleCount: 0, candidates: [] };
+    const results = await prepareChat(data.search);
     worker.postMessage({ type: "chat-shortlisted", id: data.id, results });
     return;
   }
@@ -45,7 +88,9 @@ worker.onmessage = async ({ data }) => {
     message: "Matching films and ranking watchlist picks…",
   });
   try {
-    const catalog = await loadCatalog(new URL(data.manifestUrl));
+    const catalogUrl = new URL(data.manifestUrl);
+    const catalog = await loadCatalog(catalogUrl);
+    if (catalog.version) creditCatalog = { url: catalogUrl, version: catalog.version };
     session = createSession(exported, catalog, Math.floor(Date.now() / 86_400_000));
     const { summary, genres } = session;
     worker.postMessage({
