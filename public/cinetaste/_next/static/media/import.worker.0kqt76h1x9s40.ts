@@ -5,6 +5,7 @@ import { DEFAULT_FILTERS } from "./ranking.ts";
 import { createSample } from "./sample.ts";
 import { createSession } from "./session.ts";
 import { ImportError } from "./zip.ts";
+import { buildShortlist } from "../chat/shortlist.ts";
 
 // This entry point runs only in a dedicated worker. The app's TS project also includes DOM types.
 const worker = globalThis as unknown as {
@@ -15,6 +16,13 @@ let session: ReturnType<typeof createSession> | null = null;
 let started = false;
 
 worker.onmessage = async ({ data }) => {
+  if (data.type === "chat-shortlist") {
+    const results = session
+      ? buildShortlist(session.chatFilms(), session.genres, data.search)
+      : { eligibleCount: 0, candidates: [] };
+    worker.postMessage({ type: "chat-shortlisted", id: data.id, results });
+    return;
+  }
   if (data.type === "rank") {
     if (session)
       worker.postMessage({ type: "ranked", id: data.id, results: session.recommend(data.filters) });
