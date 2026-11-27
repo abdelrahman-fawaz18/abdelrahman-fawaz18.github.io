@@ -3,7 +3,7 @@ import { loadCredits } from "./credits.ts";
 import type { CreditMatch, CreditsIndex } from "./credits.ts";
 import { creditQuery } from "../chat/people-query.ts";
 import { withoutDiscoveryClauses } from "../chat/intent.ts";
-import { releasedFilters } from "../chat/shortlist.ts";
+import { buildShortlist, releasedFilters } from "../chat/shortlist.ts";
 import type { ChatSearch, ChatShortlist } from "../chat/shortlist.ts";
 import { parseExport } from "./letterboxd.ts";
 import type { Reply, Request } from "./protocol.ts";
@@ -47,12 +47,18 @@ async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
     credits = undefined;
     match = { status: "unavailable", filter: candidate };
   }
-  if (match.status === "matched") return session.prepareChat(search, match.credit);
+  if (match.status === "matched") {
+    const result = session.prepareChat(search, match.credit);
+    if (match.correctedFrom)
+      result.creditCorrection = { from: match.correctedFrom, to: match.credit.name };
+    return result;
+  }
   if (match.status === "missing" && query && !query.required && !prior && !search.creditRole) {
     return session.prepareChat(search);
   }
+  const pending = buildShortlist([], session.genres, search);
   return {
-    ...empty,
+    ...pending,
     creditIssue: match,
     appliedFilters: {
       minRuntime: null,
@@ -61,7 +67,7 @@ async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
       maxYear: null,
       included: [],
       excluded: [],
-      ...search.previousFilters,
+      ...pending.appliedFilters,
       credit: candidate,
     },
   };
