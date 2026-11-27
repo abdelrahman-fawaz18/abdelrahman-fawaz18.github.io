@@ -2,6 +2,7 @@ import { loadCatalog } from "./catalog.ts";
 import { loadCredits } from "./credits.ts";
 import type { CreditMatch, CreditsIndex } from "./credits.ts";
 import { creditQuery } from "../chat/people-query.ts";
+import { MAX_PERSON_SUGGESTIONS } from "../chat/person-lookup.ts";
 import { withoutDiscoveryClauses } from "../chat/intent.ts";
 import { buildShortlist, releasedFilters } from "../chat/shortlist.ts";
 import type { ChatSearch, ChatShortlist } from "../chat/shortlist.ts";
@@ -22,6 +23,15 @@ let creditCatalog: { url: URL; version: string } | undefined;
 let credits: Promise<CreditsIndex> | undefined;
 let started = false;
 
+function getCredits(): Promise<CreditsIndex> {
+  if (!creditCatalog) return Promise.reject(new Error("Credits unavailable"));
+  credits ??= loadCredits(creditCatalog.url, creditCatalog.version).catch((error: unknown) => {
+    credits = undefined;
+    throw error;
+  });
+  return credits;
+}
+
 async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
   const empty = { eligibleCount: 0, candidates: [] };
   if (!session) return empty;
@@ -39,9 +49,7 @@ async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
   if (!candidate) return session.prepareChat(search);
   let match: CreditMatch;
   try {
-    if (!creditCatalog) throw new Error("Credits unavailable");
-    credits ??= loadCredits(creditCatalog.url, creditCatalog.version);
-    const index = await credits;
+    const index = await getCredits();
     match = index.match(candidate);
   } catch {
     credits = undefined;
@@ -74,6 +82,20 @@ async function prepareChat(search: ChatSearch): Promise<ChatShortlist> {
 }
 
 worker.onmessage = async ({ data }) => {
+  if (data.type === "verify-names") {
+    const names = await getCredits()
+      .then((index) => [
+        ...new Set(
+          data.names.slice(0, MAX_PERSON_SUGGESTIONS).flatMap((name) => {
+            const exact = index.verifiedName({ name, role: data.role });
+            return exact ? [exact] : [];
+          }),
+        ),
+      ])
+      .catch((): string[] => []);
+    worker.postMessage({ type: "names-verified", id: data.id, names });
+    return;
+  }
   if (data.type === "chat-shortlist") {
     const results = await prepareChat(data.search);
     worker.postMessage({ type: "chat-shortlisted", id: data.id, results });
