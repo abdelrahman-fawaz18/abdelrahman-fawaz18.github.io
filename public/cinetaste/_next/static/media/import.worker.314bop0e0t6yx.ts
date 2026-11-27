@@ -87,8 +87,25 @@ worker.onmessage = async ({ data }) => {
   if (started) return;
   started = true;
   let exported;
+  let chatProfile: Promise<string | undefined> = Promise.resolve(
+    data.type === "sample" ? "sample" : undefined,
+  );
   try {
-    exported = data.type === "sample" ? createSample() : await parseExport(data.file);
+    exported =
+      data.type === "sample"
+        ? createSample()
+        : await parseExport(data.file, (bytes) => {
+            // Hash the already-read archive to identify its local tab-session transcript.
+            if (!globalThis.crypto?.subtle) return;
+            chatProfile = crypto.subtle
+              .digest("SHA-256", bytes)
+              .then((digest) =>
+                Array.from(new Uint8Array(digest), (byte) =>
+                  byte.toString(16).padStart(2, "0"),
+                ).join(""),
+              )
+              .catch(() => undefined);
+          });
   } catch (error) {
     worker.postMessage({
       type: "error",
@@ -101,19 +118,6 @@ worker.onmessage = async ({ data }) => {
     type: "phase",
     message: "Matching films and ranking watchlist picks…",
   });
-  // The digest stays on-device and prevents restoring a transcript against a different ZIP.
-  const chatProfile =
-    data.type === "sample"
-      ? "sample"
-      : data.file
-          .arrayBuffer()
-          .then((bytes) => crypto.subtle.digest("SHA-256", bytes))
-          .then((digest) =>
-            Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join(
-              "",
-            ),
-          )
-          .catch(() => undefined);
   try {
     const catalogUrl = new URL(data.manifestUrl);
     const catalog = await loadCatalog(catalogUrl);
