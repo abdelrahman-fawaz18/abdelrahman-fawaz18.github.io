@@ -95,6 +95,19 @@ worker.onmessage = async ({ data }) => {
     type: "phase",
     message: "Matching films and ranking watchlist picks…",
   });
+  // The digest stays on-device and prevents restoring a transcript against a different ZIP.
+  const chatProfile =
+    data.type === "sample"
+      ? "sample"
+      : data.file
+          .arrayBuffer()
+          .then((bytes) => crypto.subtle.digest("SHA-256", bytes))
+          .then((digest) =>
+            Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join(
+              "",
+            ),
+          )
+          .catch(() => undefined);
   try {
     const catalogUrl = new URL(data.manifestUrl);
     const catalog = await loadCatalog(catalogUrl);
@@ -105,6 +118,7 @@ worker.onmessage = async ({ data }) => {
       type: "ready",
       summary,
       genres,
+      chatProfile: await chatProfile,
       results: session.recommend(DEFAULT_FILTERS),
     });
   } catch {
